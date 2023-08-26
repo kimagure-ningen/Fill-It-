@@ -331,8 +331,8 @@
 -r:"Assets/Plugins/DOTween/Editor/DOTweenEditor.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEngine.UI.ref.dll"
-"Library/PackageCache/com.unity.2d.common@6.0.4/Runtime/InternalBridge/AssemblyInfo.cs"
-"Library/PackageCache/com.unity.2d.common@6.0.4/Runtime/InternalBridge/InternalEngineBridge.cs"
+"Library/PackageCache/com.unity.2d.common@6.0.6/Runtime/InternalBridge/AssemblyInfo.cs"
+"Library/PackageCache/com.unity.2d.common@6.0.6/Runtime/InternalBridge/InternalEngineBridge.cs"
 -langversion:9.0
 
 /deterministic

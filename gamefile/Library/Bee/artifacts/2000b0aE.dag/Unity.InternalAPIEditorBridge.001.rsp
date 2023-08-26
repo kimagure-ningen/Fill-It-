@@ -103,6 +103,7 @@
 -define:PUN_2_OR_NEWER
 -define:PUN_2_19_OR_NEWER
 -define:UNITY_POST_PROCESSING_STACK_V2
+-define:USE_TEXTURE_PLATFORM_FIX
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -r:"/Applications/Unity/Hub/Editor/2021.3.10f1/PlaybackEngines/WebGLSupport/Managed/UnityEngine.WebGLModule.dll"
@@ -340,9 +341,10 @@
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEngine.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEngine.UI.ref.dll"
-"Library/PackageCache/com.unity.2d.common@6.0.4/Editor/InternalBridge/AssemblyInfo.cs"
-"Library/PackageCache/com.unity.2d.common@6.0.4/Editor/InternalBridge/InternalEditorBridge.cs"
-"Library/PackageCache/com.unity.2d.common@6.0.4/Editor/InternalBridge/TexturePlatformSettings/TexturePlatformSettings.cs"
+"Library/PackageCache/com.unity.2d.common@6.0.6/Editor/InternalBridge/AssemblyInfo.cs"
+"Library/PackageCache/com.unity.2d.common@6.0.6/Editor/InternalBridge/InternalEditorBridge.cs"
+"Library/PackageCache/com.unity.2d.common@6.0.6/Editor/InternalBridge/TexturePlatformSettings/TexturePlatformSettings.cs"
+"Library/PackageCache/com.unity.2d.common@6.0.6/Editor/InternalBridge/TexturePlatformSettings/TexturePlatformSettings_Before_2021_3_9f1.cs"
 -langversion:9.0
 
 /deterministic

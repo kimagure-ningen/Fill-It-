@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class TitleSceneMaster : MonoBehaviourPunCallbacks
 {
     public TransitionManager transitionManager;
-    public GameObject circle;
+    // public GameObject circle;
     public GameObject loadingDots;
     public Image blurPanel;
 
@@ -34,9 +34,9 @@ public class TitleSceneMaster : MonoBehaviourPunCallbacks
     {
         isConnected = true;
         loadingDots.SetActive(false);
-        circle.transform.DORotate(new Vector3(0f, 0f, 180f), 7f)
-            .SetLoops(-1, LoopType.Restart)
-            .SetEase(Ease.Linear);
+        //circle.transform.DORotate(new Vector3(0f, 0f, 180f), 7f)
+          //  .SetLoops(-1, LoopType.Restart)
+          //  .SetEase(Ease.Linear);
     }
 
     private void Update()

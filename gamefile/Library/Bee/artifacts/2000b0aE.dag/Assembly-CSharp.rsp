@@ -410,6 +410,7 @@
 "Assets/_Project/Scripts/Scene_ModeSelection/ModeSelectionMaster.cs"
 "Assets/_Project/Scripts/Scene_Title/LoadingDotsManager.cs"
 "Assets/_Project/Scripts/Scene_Title/TitleSceneMaster.cs"
+"Assets/_Project/Scripts/TestMaster.cs"
 "Assets/_Project/Scripts/Transitions/TransitionManager.cs"
 -langversion:9.0
 
