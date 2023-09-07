@@ -1524,6 +1524,7 @@ MonoBehaviour:
   transitionManager: {fileID: 700758412}
   loadingDots: {fileID: 2082698986}
   blurPanel: {fileID: 991720617}
+  cursor: {fileID: 2800000, guid: daaf00ec15ba446a6b319643f49775d8, type: 3}
 --- !u!1001 &674799246030681237
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -89,6 +89,10 @@ public class Player : MonoBehaviourPunCallbacks
             return;
         }
 
+        Cursor.visible = false;
+
+        transform.Find("MinimapPlayer").gameObject.GetComponent<SpriteRenderer>().color = new Color(data.x, data.y, data.z);
+
         transitionManager = GameObject.Find("Transitions").GetComponent<TransitionManager>();
         if (transitionManager == null)
         {
@@ -424,6 +428,8 @@ public class Player : MonoBehaviourPunCallbacks
 
     public void OnDeath()
     {
+        Cursor.visible = true;
+
         PlayerStatsManager.instance.lastScore = score;
 
         if (score > PlayerStatsManager.instance.highScore)

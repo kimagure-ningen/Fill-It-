@@ -18,6 +18,9 @@ public class TitleSceneMaster : MonoBehaviourPunCallbacks
 
     private float blurOpacity = 1;
 
+    [SerializeField]
+    private Texture2D cursor;
+
     private void Start()
     {
         isConnected = false;
@@ -26,6 +29,8 @@ public class TitleSceneMaster : MonoBehaviourPunCallbacks
         currentBlurCol.a = blurOpacity;
         blurPanel.color = currentBlurCol;
         loadingDots.SetActive(true);
+
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
 
         PhotonNetwork.ConnectUsingSettings();
     }
