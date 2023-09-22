@@ -175,6 +175,11 @@ public class Player : MonoBehaviourPunCallbacks
             elapsedTime = 0f;
             PhotonNetwork.LocalPlayer.UpdateScore(score);
         }
+
+        if (PhotonNetwork.PlayerList.Length  == 1)
+        {
+            OnVictory();
+        }
     }
 
     private void PlayerMovement()
@@ -453,6 +458,35 @@ public class Player : MonoBehaviourPunCallbacks
         PhotonNetwork.Disconnect();
 
         transitionManager.NextSceneLoad();
+    }
+
+    public void OnVictory()
+    {
+        Cursor.visible = true;
+
+        PlayerStatsManager.instance.lastScore = score;
+
+        if (score > PlayerStatsManager.instance.highScore)
+        {
+            PlayerStatsManager.instance.highScore = score;
+        }
+
+        Destroy(gameObject);
+
+        Debug.Log("Player Won!");
+
+        for (int x = 0; x < gameMaster.gridNum; x++)
+        {
+            for (int y = 0; y < gameMaster.gridNum; y++)
+            {
+                i_grids[x, y] = 0;
+                UpdateGridStatus(x, y);
+            }
+        }
+
+        PhotonNetwork.Disconnect();
+
+        transitionManager.PreviousSceneLoad();
     }
 
     private void FillGrid()
