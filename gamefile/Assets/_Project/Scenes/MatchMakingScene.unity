@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionManager: {fileID: 1811635281}
-  playerToStart: 1
+  playerToStart: 2
   roomCountText: {fileID: 205935657}
   timerFill: {fileID: 468649607}
   timerText: {fileID: 938404311}
