@@ -1711,6 +1711,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transitions
       objectReference: {fileID: 0}
+    - target: {fileID: 674799246454066457, guid: 0f8027af085ec44b5bc2fb85203c3bbc, type: 3}
+      propertyPath: nextScene
+      value: ModeSelectionSceneNew
+      objectReference: {fileID: 0}
     - target: {fileID: 674799246454066462, guid: 0f8027af085ec44b5bc2fb85203c3bbc, type: 3}
       propertyPath: m_Pivot.x
       value: 0
