@@ -10,10 +10,10 @@ EditorBuildSettings:
     guid: 7747801595568407fae0d42bf6dbf842
   - enabled: 1
     path: Assets/_Project/Scenes/ModeSelectionScene.unity
-    guid: 2d7815c05502246a29148f0c3a3b555c
+    guid: 23f2a067fd1ac4b9682c367da4c09cad
   - enabled: 1
-    path: Assets/_Project/Scenes/MatchMakingScene.unity
-    guid: c61770302530244728a5eec85614c17b
+    path: Assets/_Project/Scenes/LobbyScene.unity
+    guid: 30b431069e9d840c7b2e3a244e0eab1d
   - enabled: 1
     path: Assets/_Project/Scenes/GameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -23,10 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/EliminatedScene.unity
     guid: 368bc48094e454db8808d6f51b589b10
-  - enabled: 1
-    path: Assets/_Project/Scenes/ModeSelectionSceneNew.unity
-    guid: 23f2a067fd1ac4b9682c367da4c09cad
-  - enabled: 1
-    path: Assets/_Project/Scenes/LobbyScene.unity
-    guid: 30b431069e9d840c7b2e3a244e0eab1d
   m_configObjects: {}
