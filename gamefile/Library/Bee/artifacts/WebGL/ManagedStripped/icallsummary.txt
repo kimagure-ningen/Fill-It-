@@ -508,6 +508,7 @@ UnityEngine.Input::GetKeyInt
 UnityEngine.Input::GetMouseButton
 UnityEngine.Input::GetMouseButtonDown
 UnityEngine.Input::GetMouseButtonUp
+UnityEngine.Input::get_anyKeyDown
 UnityEngine.Input::get_mousePresent
 UnityEngine.Input::get_touchSupported
 UnityEngine.Input::get_touchCount
