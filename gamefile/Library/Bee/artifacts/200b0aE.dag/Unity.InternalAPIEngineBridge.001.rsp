@@ -125,6 +125,7 @@
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -r:"/Applications/Unity/Hub/Editor/2021.3.10f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll"
+-r:"/Applications/Unity/Hub/Editor/2021.3.10f1/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll"
 -r:"/Applications/Unity/Hub/Editor/2021.3.10f1/Unity.app/Contents/Managed/UnityEditor.Graphs.dll"
 -r:"/Applications/Unity/Hub/Editor/2021.3.10f1/Unity.app/Contents/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"/Applications/Unity/Hub/Editor/2021.3.10f1/Unity.app/Contents/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
@@ -350,8 +351,8 @@
 -r:"Assets/Plugins/DOTween/Editor/DOTweenEditor.dll"
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
-"Library/PackageCache/com.unity.2d.common@6.0.4/Runtime/InternalBridge/AssemblyInfo.cs"
-"Library/PackageCache/com.unity.2d.common@6.0.4/Runtime/InternalBridge/InternalEngineBridge.cs"
+"Library/PackageCache/com.unity.2d.common@6.0.6/Runtime/InternalBridge/AssemblyInfo.cs"
+"Library/PackageCache/com.unity.2d.common@6.0.6/Runtime/InternalBridge/InternalEngineBridge.cs"
 -langversion:9.0
 
 /deterministic

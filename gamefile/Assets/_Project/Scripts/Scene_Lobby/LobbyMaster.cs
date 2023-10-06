@@ -55,6 +55,11 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject saveButton;
 
+    [SerializeField]
+    private GameObject snakeHead;
+    [SerializeField]
+    private GameObject snakeBody;
+
     [Header("PlayerInfo")]
     [SerializeField]
     private Image playernum1;
@@ -69,6 +74,9 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
     [SerializeField]
     private TextMeshProUGUI playertextnum3;
 
+    List<Vector3> playerColors = new List<Vector3> { new Vector3(20f / 255f, 102f / 255f, 231f / 255f), new Vector3(255f / 255f, 71f / 255f, 78f / 255f), new Vector3(67f / 255f, 231f / 255f, 38f / 255f) };
+    private int currentIndex = 1;
+
     private void Start()
     {
         PhotonNetwork.IsMessageQueueRunning = true;
@@ -81,9 +89,13 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
         readyGameTimer = maxReadyWaitTime;
         timerToStartGame = maxWaitTime;
 
+        playerNameInput.text = PlayerStatsManager.instance.playerName;
+        PhotonNetwork.NickName = playerNameInput.text;
+
         PlayerCountUpdate();
 
-        playerNameInput.text = PlayerStatsManager.instance.playerName;
+        snakeHead.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
+        snakeBody.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
     }
 
     private void PlayerCountUpdate()
@@ -121,6 +133,14 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
         {
             playernum1.GetComponent<Image>().color = new Color(255f / 255f, 71f / 255f, 78f / 255f, 1f);
             playertextnum1.faceColor = new Color(205f / 255f, 207f / 255f, 205f / 255f, 1f);
+            if (PhotonNetwork.PlayerList[1].NickName != null)
+            {
+                playertextnum1.text = PhotonNetwork.PlayerList[1].NickName.ToString();
+            }
+            else
+            {
+                playertextnum1.text = "PlayerNo.2";
+            }
             playernum2.GetComponent<Image>().color = new Color(20f / 255f, 102f / 255f, 231f / 255f, 0.25f);
             playertextnum2.faceColor = new Color(205f / 255f, 207f / 255f, 205f / 255f, 0.25f);
             playernum3.GetComponent<Image>().color = new Color(67f / 255f, 231f / 255f, 38f / 255f, 0.25f);
@@ -130,8 +150,17 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
         {
             playernum1.GetComponent<Image>().color = new Color(255f / 255f, 71f / 255f, 78f / 255f, 1f);
             playertextnum1.faceColor = new Color(205f / 255f, 207f / 255f, 205f / 255f, 1f);
+            if (PhotonNetwork.PlayerList[1].NickName != null)
+            {
+                playertextnum1.text = PhotonNetwork.PlayerList[1].NickName.ToString();
+            }
+            else
+            {
+                playertextnum1.text = "PlayerNo.2";
+            }
             playernum2.GetComponent<Image>().color = new Color(20f / 255f, 102f / 255f, 231f / 255f, 1f);
             playertextnum2.faceColor = new Color(205f / 255f, 207f / 255f, 205f / 255f, 1f);
+            playertextnum2.text = PhotonNetwork.PlayerList[2].NickName.ToString();
             playernum3.GetComponent<Image>().color = new Color(67f / 255f, 231f / 255f, 38f / 255f, 0.25f);
             playertextnum3.faceColor = new Color(205f / 255f, 207f / 255f, 205f / 255f, 0.25f);
         }
@@ -139,10 +168,20 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
         {
             playernum1.GetComponent<Image>().color = new Color(255f / 255f, 71f / 255f, 78f / 255f, 1f);
             playertextnum1.faceColor = new Color(205f / 255f, 207f / 255f, 205f / 255f, 1f);
+            if (PhotonNetwork.PlayerList[1].NickName != null)
+            {
+                playertextnum1.text = PhotonNetwork.PlayerList[1].NickName.ToString();
+            }
+            else
+            {
+                playertextnum1.text = "PlayerNo.2";
+            }
             playernum2.GetComponent<Image>().color = new Color(20f / 255f, 102f / 255f, 231f / 255f, 1f);
             playertextnum2.faceColor = new Color(205f / 255f, 207f / 255f, 205f / 255f, 1f);
+            playertextnum2.text = PhotonNetwork.PlayerList[2].NickName.ToString();
             playernum3.GetComponent<Image>().color = new Color(67f / 255f, 231f / 255f, 38f / 255f, 1f);
             playertextnum3.faceColor = new Color(205f / 255f, 207f / 255f, 205f / 255f, 1f);
+            playertextnum3.text = PhotonNetwork.PlayerList[3].NickName.ToString();
         }
     }
 
@@ -227,6 +266,8 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
     public void NameInput()
     {
         PlayerStatsManager.instance.playerName = playerNameInput.text;
+        PhotonNetwork.NickName = playerNameInput.text;
+        PlayerCountUpdate();
     }
 
     private void ResetTimer()
@@ -251,7 +292,6 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
     public void SaveButtonHover()
     {
         saveButton.transform.DOScale(new Vector3(1.075f, 1.075f, 1.075f), .25f);
-        Debug.Log("yo");
     }
     public void SaveButtonExit()
     {
@@ -264,18 +304,39 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
      
     public void LeftArrowClick()
     {
-        Debug.Log("whay");
-        leftArrow.transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), .25f);
+        leftArrow.transform.DOScale(new Vector3(0.85f, 0.85f, 0.85f), .25f);
+        if (currentIndex != 0)
+        {
+            currentIndex--;
+            snakeHead.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
+            snakeBody.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
+        } else if(currentIndex == 0)
+        {
+            currentIndex = playerColors.Count - 1;
+            snakeHead.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
+            snakeBody.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
+        } 
     }
-    public void LeftArrowExit()
+    public void LeftArrowUp()
     {
         leftArrow.transform.DOScale(new Vector3(1f, 1f, 1f), .25f);
     }
     public void RightArrowClick()
     {
-        rightArrow.transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), .25f);
+        rightArrow.transform.DOScale(new Vector3(0.85f, 0.85f, 0.85f), .25f);
+        if (currentIndex != playerColors.Count - 1)
+        {
+            currentIndex++;
+            snakeHead.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
+            snakeBody.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
+        } else if (currentIndex == playerColors.Count - 1)
+        {
+            currentIndex = 0;
+            snakeHead.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
+            snakeBody.GetComponent<SpriteRenderer>().color = new Color(playerColors[currentIndex].x, playerColors[currentIndex].y, playerColors[currentIndex].z);
+        }
     }
-    public void RightArrowExit()
+    public void RightArrowUp()
     {
         rightArrow.transform.DOScale(new Vector3(1f, 1f, 1f), .25f);
     }

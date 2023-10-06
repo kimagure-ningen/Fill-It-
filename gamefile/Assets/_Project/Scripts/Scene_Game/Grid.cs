@@ -26,6 +26,21 @@ public class Grid : MonoBehaviour
                     player.OnDeath();
                 }
             }
+        } else
+        {
+            if (collision.gameObject.tag == nameof(Player))
+            {
+                int collisionId = collision.gameObject.GetComponent<PhotonView>().ViewID;
+                Debug.Log(collisionId);
+                if (playerId == 0)
+                {
+                    return;
+                }
+                if (collisionId != playerId)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 }

@@ -424,11 +424,11 @@
 "Assets/_Project/Scripts/Scene_Game/LeaderboardMaster.cs"
 "Assets/_Project/Scripts/Scene_Game/PassedGrids.cs"
 "Assets/_Project/Scripts/Scene_Game/PhotonScore.cs"
-"Assets/_Project/Scripts/Scene_MatchMaking/CoutdownSwitch.cs"
-"Assets/_Project/Scripts/Scene_MatchMaking/MatchMakingMaster.cs"
+"Assets/_Project/Scripts/Scene_Lobby/LobbyMaster.cs"
 "Assets/_Project/Scripts/Scene_ModeSelection/ModeSelectionMaster.cs"
 "Assets/_Project/Scripts/Scene_Title/LoadingDotsManager.cs"
 "Assets/_Project/Scripts/Scene_Title/TitleSceneMaster.cs"
+"Assets/_Project/Scripts/Scene_Victory/VictorySceneMaster.cs"
 "Assets/_Project/Scripts/Transitions/TransitionManager.cs"
 -langversion:9.0
 

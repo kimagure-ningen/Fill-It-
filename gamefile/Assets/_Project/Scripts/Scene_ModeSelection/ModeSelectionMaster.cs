@@ -1,63 +1,117 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
-using DG.Tweening;
 using UnityEngine.SceneManagement;
 using TMPro;
+using DG.Tweening;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class ModeSelectionMaster : MonoBehaviourPunCallbacks
 {
     public TransitionManager transitionManager;
-    public GameObject circle;
     [SerializeField]
-    private TMP_InputField playerNameInput;
+    private GameObject battleRoyale;
+    [SerializeField]
+    private GameObject sandbox;
+    [SerializeField]
+    private GameObject comingSoon;
+    [SerializeField]
+    private GameObject battleRoyalePlay;
+    [SerializeField]
+    private GameObject sandboxPlay;
 
-    private int roomSize = 5;
+    private float expandSize = 1.075f;
 
-    private void Start()
+    private int roomSize = 4;
+
+    public void BattleRoyaleHover()
     {
-        circle.transform.DORotate(new Vector3(0f, 0f, 180f), 5f)
-            .SetLoops(-1, LoopType.Restart);
-
-        playerNameInput.text = PlayerStatsManager.instance.playerName;
+        battleRoyale.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
+    }
+    public void BattleRoyaleHoverExit()
+    {
+        battleRoyale.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), .25f);
+    }
+    public void SandboxHover()
+    {
+        sandbox.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
+    }
+    public void SandboxHoverExit()
+    {
+        sandbox.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), .25f);
+    }
+    public void ComingSoonHover()
+    {
+        comingSoon.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
+    }
+    public void ComingSoonHoverExit()
+    {
+        comingSoon.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), .25f);
     }
 
-    public void NameInput()
+    public void BattleRoyalePlayHover()
     {
-        PlayerStatsManager.instance.playerName = playerNameInput.text;
+        battleRoyale.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
+        battleRoyalePlay.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
     }
-
-    public void OnPvPButtonDown()
+    public void BattleRoyalePlayHoverExit()
     {
-        PhotonNetwork.NickName = PlayerStatsManager.instance.playerName;
+        battleRoyalePlay.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), .25f);
+    }
+    public void BattleRoyalePlayDown()
+    {
+        battleRoyalePlay.transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), .25f);
 
         PhotonNetwork.JoinRandomRoom();
+    }
+    public void BattleRoyalePlayUp()
+    {
+        battleRoyalePlay.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
+    }
+
+    public void SandboxPlayHover()
+    {
+        sandbox.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
+        sandboxPlay.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
+    }
+    public void SandboxPlayHoverExit()
+    {
+        sandboxPlay.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), .25f);
+    }
+    public void SandboxPlayDown()
+    {
+        sandboxPlay.transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), .25f);
+        SceneManager.LoadScene("SandboxScene");
+    }
+    public void SandboxPlayUp()
+    {
+        sandboxPlay.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
+    }
+
+    public void BackButtonDown()
+    {
+        transitionManager.PreviousSceneLoad();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         CreateRoom();
     }
-
     public override void OnJoinedRoom()
     {
         PhotonNetwork.IsMessageQueueRunning = false;
 
         transitionManager.NextSceneLoad();
     }
-
     private void CreateRoom()
     {
         int randomRoomNumber = Random.Range(0, 10000);
         RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)roomSize };
         PhotonNetwork.CreateRoom("Room" + randomRoomNumber, roomOptions);
     }
-
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        // base.OnCreateRoomFailed(returnCode, message);
         Debug.Log("Failed to create room...");
         CreateRoom();
     }

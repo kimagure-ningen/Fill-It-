@@ -670,8 +670,26 @@ public class Player : MonoBehaviourPunCallbacks
     {
         if (collision.gameObject.tag == "PowerUps")
         {
-            PhotonNetwork.Destroy(collision.gameObject);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Destroy(collision.gameObject);
+            } else
+            {
+                Destroy(collision.gameObject);
+            }
+            
             StartCoroutine("PowerUp");
+        }
+
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
+        if (collision.gameObject.tag == "EnemyGrid")
+        {
+            Debug.Log("Destroying Grid");
+            Destroy(collision.gameObject);
         }
     }
 
