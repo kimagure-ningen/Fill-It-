@@ -98,6 +98,7 @@ public class ModeSelectionMaster : MonoBehaviourPunCallbacks
     {
         CreateRoom();
     }
+
     public override void OnJoinedRoom()
     {
         PhotonNetwork.IsMessageQueueRunning = false;
