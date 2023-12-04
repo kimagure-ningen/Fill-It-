@@ -3048,4 +3048,4 @@ ScriptsOnlyBuild:
   - Assets/_Project/Scenes/GameScene.unity
   - Assets/_Project/Scenes/VictoryScene.unity
   - Assets/_Project/Scenes/EliminatedScene.unity
-  playerPath: "/Users/daitoyamagishi/Desktop/GameFolder/\u5B9F\u884C\u30D5\u30A1\u30A4\u30EB_Mac/fillit.app"
+  playerPath: /Users/daitoyamagishi/Desktop/gamem/game.app

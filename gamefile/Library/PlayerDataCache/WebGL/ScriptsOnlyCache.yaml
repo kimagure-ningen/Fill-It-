@@ -3048,4 +3048,4 @@ ScriptsOnlyBuild:
   - Assets/_Project/Scenes/GameScene.unity
   - Assets/_Project/Scenes/VictoryScene.unity
   - Assets/_Project/Scenes/EliminatedScene.unity
-  playerPath: /Users/daitoyamagishi/Desktop/gamefile
+  playerPath: /Users/daitoyamagishi/Desktop/game/gamefile
