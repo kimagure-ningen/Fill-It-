@@ -437,3 +437,9 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 85.245278 seconds.
+  path: Assets/_Project/5_BattleRoyale
+  artifactKey: Guid(714eb0bbcbdbf4785877cdacbe98be69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Project/5_BattleRoyale using Guid(714eb0bbcbdbf4785877cdacbe98be69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2444e55023a47e86c56b5f8ccafb983e') in 0.039717 seconds 
