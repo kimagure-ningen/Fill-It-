@@ -258,6 +258,12 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
             {
                 return;
             }
+
+            if (playerCount < 2)
+            {
+                UnableToMatch();
+            }
+            
             PhotonNetwork.NickName = PlayerStatsManager.instance.playerName;
             StartGame();
         }
@@ -286,7 +292,12 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
             return;
         }
         PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.LoadLevel("GameScene");
+        PhotonNetwork.LoadLevel("BattleRoyaleScene");
+    }
+
+    private void UnableToMatch()
+    {
+        //なにか処理書く
     }
 
     public void SaveButtonHover()

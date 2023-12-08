@@ -474,7 +474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 674799246454066457, guid: 0f8027af085ec44b5bc2fb85203c3bbc, type: 3}
       propertyPath: nextScene
-      value: GameScene
+      value: BattleRoyaleScene
       objectReference: {fileID: 0}
     - target: {fileID: 674799246454066457, guid: 0f8027af085ec44b5bc2fb85203c3bbc, type: 3}
       propertyPath: isStartMenu

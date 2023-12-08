@@ -423,6 +423,7 @@
 "Assets/_Project/5_BattleRoyale/LeaderboardMaster.cs"
 "Assets/_Project/5_BattleRoyale/PassedGrids.cs"
 "Assets/_Project/5_BattleRoyale/PhotonScore.cs"
+"Assets/_Project/6_Sandbox/LocalGameMaster.cs"
 "Assets/_Project/7_Victory/VictorySceneMaster.cs"
 "Assets/_Project/8_Eliminate/EliminatedSceneMaster.cs"
 "Assets/_Project/Scripts/Data/DataPersistenceManager.cs"
