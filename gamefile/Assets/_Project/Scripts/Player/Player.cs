@@ -9,6 +9,7 @@ using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
+using unityroom.Api;
 
 public class Player : MonoBehaviourPunCallbacks
 {
@@ -436,6 +437,8 @@ public class Player : MonoBehaviourPunCallbacks
         Cursor.visible = true;
 
         PlayerStatsManager.instance.lastScore = score;
+        
+        UnityroomApiClient.Instance.SendScore(1, score, ScoreboardWriteMode.Always);
 
         if (score > PlayerStatsManager.instance.highScore)
         {
@@ -465,6 +468,8 @@ public class Player : MonoBehaviourPunCallbacks
         Cursor.visible = true;
 
         PlayerStatsManager.instance.lastScore = score;
+        
+        UnityroomApiClient.Instance.SendScore(1, score, ScoreboardWriteMode.Always);
 
         if (score > PlayerStatsManager.instance.highScore)
         {

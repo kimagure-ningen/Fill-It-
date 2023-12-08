@@ -90,6 +90,7 @@
 -define:ENABLE_UNITY_COLLECTIONS_CHECKS
 -define:ENABLE_BURST_AOT
 -define:UNITY_TEAM_LICENSE
+-define:UNITY_PRO_LICENSE
 -define:ENABLE_CUSTOM_RENDER_TEXTURE
 -define:ENABLE_DIRECTOR
 -define:ENABLE_LOCALIZATION
@@ -340,6 +341,7 @@
 -r:"Library/Bee/artifacts/2000b0aE.dag/Assembly-CSharp.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/Cinemachine.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/com.unity.cinemachine.editor.ref.dll"
+-r:"Library/Bee/artifacts/2000b0aE.dag/ParrelSync.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/PhotonChat.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/PhotonRealtime.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/PhotonUnityNetworking.Demos.ref.dll"
@@ -398,6 +400,7 @@
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEngine.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/UnityEngine.UI.ref.dll"
+-r:"Library/Bee/artifacts/2000b0aE.dag/unityroom.ref.dll"
 "Assets/Photon/PhotonChat/Demos/DemoChat/Editor/ChatEditor.cs"
 -langversion:9.0
 

@@ -82,6 +82,7 @@
 -define:NET_STANDARD_2_1
 -define:NETSTANDARD
 -define:NETSTANDARD2_1
+-define:UNITY_PRO_LICENSE
 -define:ENABLE_CUSTOM_RENDER_TEXTURE
 -define:ENABLE_DIRECTOR
 -define:ENABLE_LOCALIZATION
@@ -316,6 +317,7 @@
 -r:"Library/Bee/artifacts/2000b0aP.dag/Unity.VisualScripting.Flow.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aP.dag/Unity.VisualScripting.State.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aP.dag/UnityEngine.UI.ref.dll"
+-r:"Library/Bee/artifacts/2000b0aP.dag/unityroom.ref.dll"
 "Assets/Plugins/DOTween/Modules/DOTweenModuleAudio.cs"
 "Assets/Plugins/DOTween/Modules/DOTweenModuleEPOOutline.cs"
 "Assets/Plugins/DOTween/Modules/DOTweenModulePhysics.cs"
