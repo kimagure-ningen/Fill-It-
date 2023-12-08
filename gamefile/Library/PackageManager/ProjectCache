@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638376242680000000
-    m_Hash: 3603153403
+      ticks: 638376424130000000
+    m_Hash: 1485300885
   m_LockFileStatus:
     m_FilePath: /Users/daitoyamagishi/Documents/Fill-It!/gamefile/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638376242680000000
-    m_Hash: 2352801132
+      ticks: 638376424130000000
+    m_Hash: 2048536038
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -1570,6 +1570,51 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 1.7.8
+    nextVersion: 
+- packageId: com.unityroom.client@https://github.com/naichilab/unityroom-client-library.git?path=Assets/unityroom
+  testable: 0
+  isDirectDependency: 1
+  version: 0.9.6
+  source: 5
+  resolvedPath: /Users/daitoyamagishi/Documents/Fill-It!/gamefile/Library/PackageCache/com.unityroom.client@c4dea57e1c
+  assetPath: Packages/com.unityroom.client
+  name: com.unityroom.client
+  displayName: Unityroom Client Library
+  author:
+    name: naichilab
+    email: naichilab@live.jp
+    url: https://github.com/naichilab
+  category: 
+  type: 
+  description: Unityroom API Client Library.
+  status: 4
+  errors: []
+  versions:
+    all: []
+    compatible: []
+    verified: 
+  dependencies: []
+  resolvedDependencies: []
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 
     nextVersion: 
 - packageId: com.veriorpies.parrelsync@https://github.com/VeriorPies/ParrelSync.git?path=/ParrelSync
   testable: 0

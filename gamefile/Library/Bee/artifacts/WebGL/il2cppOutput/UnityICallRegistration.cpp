@@ -2878,6 +2878,14 @@ void RegisterAllStrippedInternalCalls()
 
 	//Start Registrations for type : UnityEngine.Networking.DownloadHandler
 
+		//System.Byte* UnityEngine.Networking.DownloadHandler::InternalGetByteArray(UnityEngine.Networking.DownloadHandler,System.Int32&)
+		void Register_UnityEngine_Networking_DownloadHandler_InternalGetByteArray();
+		Register_UnityEngine_Networking_DownloadHandler_InternalGetByteArray();
+
+		//System.String UnityEngine.Networking.DownloadHandler::GetContentType()
+		void Register_UnityEngine_Networking_DownloadHandler_GetContentType();
+		Register_UnityEngine_Networking_DownloadHandler_GetContentType();
+
 		//System.Void UnityEngine.Networking.DownloadHandler::Release()
 		void Register_UnityEngine_Networking_DownloadHandler_Release();
 		Register_UnityEngine_Networking_DownloadHandler_Release();
@@ -2898,6 +2906,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Networking_UnityWebRequest_get_isModifiable();
 		Register_UnityEngine_Networking_UnityWebRequest_get_isModifiable();
 
+		//System.Int64 UnityEngine.Networking.UnityWebRequest::get_responseCode()
+		void Register_UnityEngine_Networking_UnityWebRequest_get_responseCode();
+		Register_UnityEngine_Networking_UnityWebRequest_get_responseCode();
+
 		//System.IntPtr UnityEngine.Networking.UnityWebRequest::Create()
 		void Register_UnityEngine_Networking_UnityWebRequest_Create();
 		Register_UnityEngine_Networking_UnityWebRequest_Create();
@@ -2917,6 +2929,10 @@ void RegisterAllStrippedInternalCalls()
 		//UnityEngine.Networking.UnityWebRequest/Result UnityEngine.Networking.UnityWebRequest::get_result()
 		void Register_UnityEngine_Networking_UnityWebRequest_get_result();
 		Register_UnityEngine_Networking_UnityWebRequest_get_result();
+
+		//UnityEngine.Networking.UnityWebRequest/UnityWebRequestError UnityEngine.Networking.UnityWebRequest::InternalSetRequestHeader(System.String,System.String)
+		void Register_UnityEngine_Networking_UnityWebRequest_InternalSetRequestHeader();
+		Register_UnityEngine_Networking_UnityWebRequest_InternalSetRequestHeader();
 
 		//UnityEngine.Networking.UnityWebRequest/UnityWebRequestError UnityEngine.Networking.UnityWebRequest::SetCustomMethod(System.String)
 		void Register_UnityEngine_Networking_UnityWebRequest_SetCustomMethod();
@@ -2951,6 +2967,14 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_Networking_UploadHandler_Release();
 
 	//End Registrations for type : UnityEngine.Networking.UploadHandler
+
+	//Start Registrations for type : UnityEngine.Networking.UploadHandlerRaw
+
+		//System.IntPtr UnityEngine.Networking.UploadHandlerRaw::Create(UnityEngine.Networking.UploadHandlerRaw,System.Byte*,System.Int32)
+		void Register_UnityEngine_Networking_UploadHandlerRaw_Create();
+		Register_UnityEngine_Networking_UploadHandlerRaw_Create();
+
+	//End Registrations for type : UnityEngine.Networking.UploadHandlerRaw
 
 	//Start Registrations for type : UnityEngine.NoAllocHelpers
 
