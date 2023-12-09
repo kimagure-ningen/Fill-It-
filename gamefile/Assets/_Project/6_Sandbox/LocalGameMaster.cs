@@ -68,9 +68,10 @@ public class LocalGameMaster : MonoBehaviour
 
         int colorNum = Random.Range(0, gridColors.Count);
 
-        object[] instanceData = new object[1];
-        instanceData[0] = new Vector3(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
+        // object[] instanceData = new object[1];
+        // instanceData[0] = new Vector3(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
         GameObject _player = Instantiate(playerObj, new Vector2(playerSpawnX, playerSpawnY), Quaternion.identity);
+        _player.GetComponent<SpriteRenderer>().color = new Color(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
 
         _player.GetComponent<Player>().gameMaster = gameObject.GetComponent<GameMaster>();
         _player.GetComponent<Player>().gridParent = gridParent;

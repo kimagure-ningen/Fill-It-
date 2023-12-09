@@ -496,6 +496,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 674799246454066457, guid: 0f8027af085ec44b5bc2fb85203c3bbc, type: 3}
+      propertyPath: optionScene
+      value: SandboxScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 674799246454066457, guid: 0f8027af085ec44b5bc2fb85203c3bbc, type: 3}
       propertyPath: previousScene
       value: TitleScene
       objectReference: {fileID: 0}
@@ -1171,7 +1175,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 6819323065514269358, guid: c57223309391b4d4c9b317ed9e59a2e5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

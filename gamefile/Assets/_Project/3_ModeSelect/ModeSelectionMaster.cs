@@ -82,7 +82,8 @@ public class ModeSelectionMaster : MonoBehaviourPunCallbacks
     public void SandboxPlayDown()
     {
         sandboxPlay.transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), .25f);
-        SceneManager.LoadScene("SandboxScene");
+        
+        transitionManager.OptionSceneLoad();
     }
     public void SandboxPlayUp()
     {

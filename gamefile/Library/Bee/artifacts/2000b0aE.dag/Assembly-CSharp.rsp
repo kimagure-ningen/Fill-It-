@@ -405,15 +405,16 @@
 "Assets/_Project/5_BattleRoyale/LeaderboardMaster.cs"
 "Assets/_Project/5_BattleRoyale/PassedGrids.cs"
 "Assets/_Project/5_BattleRoyale/PhotonScore.cs"
+"Assets/_Project/5_BattleRoyale/Player.cs"
 "Assets/_Project/6_Sandbox/LocalGameMaster.cs"
+"Assets/_Project/6_Sandbox/LocalPlayer.cs"
 "Assets/_Project/7_Victory/VictorySceneMaster.cs"
 "Assets/_Project/8_Eliminate/EliminatedSceneMaster.cs"
 "Assets/_Project/Scripts/Data/DataPersistenceManager.cs"
 "Assets/_Project/Scripts/Data/FileDataHandler.cs"
 "Assets/_Project/Scripts/Data/GameData.cs"
 "Assets/_Project/Scripts/Data/IDataPersistence.cs"
-"Assets/_Project/Scripts/Player/Player.cs"
-"Assets/_Project/Scripts/Player/PlayerStatsManager.cs"
+"Assets/_Project/Scripts/Data/PlayerStatsManager.cs"
 "Assets/_Project/Scripts/Transitions/TransitionManager.cs"
 -langversion:9.0
 

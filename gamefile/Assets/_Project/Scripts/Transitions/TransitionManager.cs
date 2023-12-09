@@ -19,6 +19,9 @@ public class TransitionManager : MonoBehaviour
     [SerializeField]
     private string previousScene;
 
+    [SerializeField] 
+    private string optionScene;
+
     private float transitionTime = 0.5f;
 
     private void Start()
@@ -37,6 +40,11 @@ public class TransitionManager : MonoBehaviour
     public void PreviousSceneLoad()
     {
         StartCoroutine("LoadPreviousLevel");
+    }
+    
+    public void OptionSceneLoad()
+    {
+        StartCoroutine("LoadOptionLevel");
     }
 
     IEnumerator LoadThisLevel()
@@ -64,5 +72,14 @@ public class TransitionManager : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(previousScene);
+    }
+    
+    IEnumerator LoadOptionLevel()
+    {
+        endTransition.SetActive(true);
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(optionScene);
     }
 }
