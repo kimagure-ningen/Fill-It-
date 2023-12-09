@@ -481,8 +481,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 674799246454066457, guid: 0f8027af085ec44b5bc2fb85203c3bbc, type: 3}
+      propertyPath: optionScene
+      value: UnableToMatchScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 674799246454066457, guid: 0f8027af085ec44b5bc2fb85203c3bbc, type: 3}
       propertyPath: previousScene
-      value: TitleScene
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 674799246454066462, guid: 0f8027af085ec44b5bc2fb85203c3bbc, type: 3}
       propertyPath: m_Pivot.x
@@ -1890,7 +1894,7 @@ MonoBehaviour:
   roomCountText: {fileID: 2100308627}
   timerFill: {fileID: 1641938625}
   timerText: {fileID: 1458654490}
-  maxWaitTime: 60
+  maxWaitTime: 10
   maxReadyWaitTime: 10
   maxFullGameWaitTime: 5
   playerNameInput: {fileID: 1013688308}

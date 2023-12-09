@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/8_Eliminate/EliminatedScene.unity
     guid: 368bc48094e454db8808d6f51b589b10
+  - enabled: 1
+    path: Assets/_Project/9_UnableMatch/UnableToMatchScene.unity
+    guid: 51f42512c398048c281754d34023b99d
   m_configObjects: {}

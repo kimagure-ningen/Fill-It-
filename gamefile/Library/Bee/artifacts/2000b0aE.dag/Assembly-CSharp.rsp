@@ -410,6 +410,7 @@
 "Assets/_Project/6_Sandbox/LocalPlayer.cs"
 "Assets/_Project/7_Victory/VictorySceneMaster.cs"
 "Assets/_Project/8_Eliminate/EliminatedSceneMaster.cs"
+"Assets/_Project/9_UnableMatch/UnableToMatchMaster.cs"
 "Assets/_Project/Scripts/Data/DataPersistenceManager.cs"
 "Assets/_Project/Scripts/Data/FileDataHandler.cs"
 "Assets/_Project/Scripts/Data/GameData.cs"

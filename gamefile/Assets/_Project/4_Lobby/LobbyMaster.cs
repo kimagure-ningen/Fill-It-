@@ -263,9 +263,11 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
             {
                 UnableToMatch();
             }
-            
-            PhotonNetwork.NickName = PlayerStatsManager.instance.playerName;
-            StartGame();
+            else
+            {
+                PhotonNetwork.NickName = PlayerStatsManager.instance.playerName;
+                StartGame();
+            }
         }
     }
 
@@ -297,7 +299,10 @@ public class LobbyMaster : MonoBehaviourPunCallbacks
 
     private void UnableToMatch()
     {
-        //なにか処理書く
+        startingGame = true;
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.LeaveRoom();
+        transitionManager.OptionSceneLoad();
     }
 
     public void SaveButtonHover()

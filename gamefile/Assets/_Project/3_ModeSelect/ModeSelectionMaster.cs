@@ -21,9 +21,9 @@ public class ModeSelectionMaster : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject sandboxPlay;
 
-    private float expandSize = 1.075f;
+    private readonly float expandSize = 1.075f;
 
-    private int roomSize = 4;
+    private readonly int roomSize = 4;
 
     public void BattleRoyaleHover()
     {
