@@ -167,6 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e90b39de27d4ccd853267eb5a92a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridParent: {fileID: 0}
+  grid: {fileID: 0}
+  energyOrb: {fileID: 0}
+  playerObj: {fileID: 0}
+  gridNum: 100
+  playerSpawnX: 0
+  playerSpawnY: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1163,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1802501862}
   - component: {fileID: 1802501861}
-  - component: {fileID: 1802501860}
   m_Layer: 0
   m_Name: MinimapCam
   m_TagString: Untagged
@@ -1164,14 +1170,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1802501860
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802501859}
-  m_Enabled: 1
 --- !u!20 &1802501861
 Camera:
   m_ObjectHideFlags: 0

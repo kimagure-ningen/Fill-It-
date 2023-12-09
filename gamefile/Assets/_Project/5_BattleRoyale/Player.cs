@@ -694,6 +694,7 @@ public class Player : MonoBehaviourPunCallbacks
         if (collision.gameObject.tag == "EnemyGrid")
         {
             Debug.Log("Destroying Grid");
+            Debug.Log("ちゃんと呼ばれてる？");
             Destroy(collision.gameObject);
         }
     }
