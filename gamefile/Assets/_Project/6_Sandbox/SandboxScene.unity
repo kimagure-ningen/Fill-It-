@@ -167,10 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e90b39de27d4ccd853267eb5a92a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridParent: {fileID: 0}
-  grid: {fileID: 0}
+  gridParent: {fileID: 2100272042}
+  grid: {fileID: 6229167569711281652, guid: 92faf5de5b57e4bba9a59a6f39648b4c, type: 3}
   energyOrb: {fileID: 0}
-  playerObj: {fileID: 0}
+  playerObj: {fileID: 7350028529824858523, guid: 7eee42ee9b53f4cb4941c34e735bed12, type: 3}
   gridNum: 100
   playerSpawnX: 0
   playerSpawnY: 0

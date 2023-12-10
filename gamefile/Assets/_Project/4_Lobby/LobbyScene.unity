@@ -1894,7 +1894,7 @@ MonoBehaviour:
   roomCountText: {fileID: 2100308627}
   timerFill: {fileID: 1641938625}
   timerText: {fileID: 1458654490}
-  maxWaitTime: 10
+  maxWaitTime: 60
   maxReadyWaitTime: 10
   maxFullGameWaitTime: 5
   playerNameInput: {fileID: 1013688308}

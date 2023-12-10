@@ -9,6 +9,8 @@ using DG.Tweening;
 
 public class LocalPlayer : MonoBehaviour
 {
+    public int playerId;
+    
     public GameMaster gameMaster;
     public GameObject gridParent;
 
@@ -75,6 +77,8 @@ public class LocalPlayer : MonoBehaviour
     private void Start()
     {
         this.playerNameText.text = "SandboxPlayer";
+        
+        playerId = Random.Range(0, 1000000);
 
         // object[] receivedData = gameObject.GetComponent<PhotonView>().InstantiationData;
         // Vector3 data = (Vector3)receivedData[0];
@@ -234,7 +238,7 @@ public class LocalPlayer : MonoBehaviour
             path_list.Add(new Vector2(posx, posy));
 
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            // gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = photonView.ViewID;
+            gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = this.playerId;
             gameMaster.g_grids[posx, posy].GetComponent<Grid>().isPath = true;
             passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
             return;
@@ -271,7 +275,7 @@ public class LocalPlayer : MonoBehaviour
             path_list.Add(new Vector2(posx, posy));
 
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            // gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = photonView.ViewID;
+            gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = this.playerId;
             gameMaster.g_grids[posx, posy].GetComponent<Grid>().isPath = true;
             passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
             return;
@@ -309,7 +313,7 @@ public class LocalPlayer : MonoBehaviour
             path_list.Add(new Vector2(posx, posy));
 
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            // gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = photonView.ViewID;
+            gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = this.playerId;
             gameMaster.g_grids[posx, posy].GetComponent<Grid>().isPath = true;
             passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
             return;
@@ -346,7 +350,7 @@ public class LocalPlayer : MonoBehaviour
             path_list.Add(new Vector2(posx, posy));
 
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            // gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = photonView.ViewID;
+            gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = this.playerId;
             gameMaster.g_grids[posx, posy].GetComponent<Grid>().isPath = true;
             passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
             return;
