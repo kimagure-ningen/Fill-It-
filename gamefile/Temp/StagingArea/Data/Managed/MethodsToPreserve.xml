@@ -1,0 +1,38 @@
+<linker>
+	<assembly fullname="Assembly-CSharp" ignoreIfMissing="1">
+		<type fullname="LobbyMaster">
+			<method name="LeftArrowClick"/>
+			<method name="LeftArrowUp"/>
+			<method name="NameInput"/>
+			<method name="RightArrowClick"/>
+			<method name="RightArrowUp"/>
+			<method name="SaveButtonClick"/>
+			<method name="SaveButtonExit"/>
+			<method name="SaveButtonHover"/>
+		</type>
+		<type fullname="ModeSelectionMaster">
+			<method name="BackButtonDown"/>
+			<method name="BattleRoyaleHover"/>
+			<method name="BattleRoyaleHoverExit"/>
+			<method name="BattleRoyalePlayDown"/>
+			<method name="BattleRoyalePlayHover"/>
+			<method name="BattleRoyalePlayHoverExit"/>
+			<method name="BattleRoyalePlayUp"/>
+			<method name="ComingSoonHover"/>
+			<method name="ComingSoonHoverExit"/>
+			<method name="SandboxHover"/>
+			<method name="SandboxHoverExit"/>
+			<method name="SandboxPlayDown"/>
+			<method name="SandboxPlayDown"/>
+			<method name="SandboxPlayHover"/>
+			<method name="SandboxPlayHoverExit"/>
+		</type>
+		<type fullname="UnableToMatchMaster">
+			<method name="BackButtonDown"/>
+			<method name="RetryButtonDown"/>
+			<method name="RetryButtonHover"/>
+			<method name="RetryButtonHoverExit"/>
+			<method name="RetryButtonUp"/>
+		</type>
+	</assembly>
+</linker>
