@@ -121,7 +121,7 @@ public class LocalPlayer : MonoBehaviour
         filledGrids = Instantiate(_filledGrids, Vector2.zero, Quaternion.identity);
 
         // 通ったマス保存するGameObject生成
-        Instantiate(_passedGrids, Vector2.zero, Quaternion.identity);
+        passedGrids = Instantiate(_passedGrids, Vector2.zero, Quaternion.identity);
 
         //passedGrids.GetComponent<PassedGrids>().playerViewId = photonView.ViewID;
         //passedGrids.GetComponent<PassedGrids>().CheckViewID();
@@ -154,11 +154,6 @@ public class LocalPlayer : MonoBehaviour
 
     private void Update()
     {
-        // if (!photonView.IsMine)
-        // {
-        //     return;
-        // }
-
         CheckInput();
         CheckPlayerPos();
 
@@ -174,12 +169,6 @@ public class LocalPlayer : MonoBehaviour
         {
             OnDeath();
         }
-
-        // if (PhotonNetwork.PlayerList.Length  == 1)
-        // {
-        //     OnVictory();
-        //　やめれるようにする
-        // }
     }
 
     private void PlayerMovement()
@@ -236,9 +225,6 @@ public class LocalPlayer : MonoBehaviour
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
             // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
-            
-            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
-            Debug.Log(gameMaster.g_grids[posx, posy].transform.position);
             return;
         }
 
@@ -279,9 +265,6 @@ public class LocalPlayer : MonoBehaviour
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
             // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
-            
-            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
-            Debug.Log(gameMaster.g_grids[posx, posy].transform.position);
             return;
         }
 
@@ -323,9 +306,6 @@ public class LocalPlayer : MonoBehaviour
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
             // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
-            
-            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
-            Debug.Log(gameMaster.g_grids[posx, posy].transform.position);
             return;
         }
 
@@ -361,15 +341,11 @@ public class LocalPlayer : MonoBehaviour
             UpdateGridStatus(posx, posy);
             path_list.Add(new Vector2(posx, posy));
             
-            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
             // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
-            
-            Debug.Log(gameMaster.g_grids[posx, posy].transform.position);
-            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             return;
         }
 
@@ -501,18 +477,13 @@ public class LocalPlayer : MonoBehaviour
     {
         Cursor.visible = true;
 
-        //PlayerStatsManager.instance.lastScore = score;
+        gameMaster.players.Remove(gameObject);
         
-        // UnityroomApiClient.Instance.SendScore(1, score, ScoreboardWriteMode.Always);
-
-        // if (score > PlayerStatsManager.instance.highScore)
-        // {
-        //     PlayerStatsManager.instance.highScore = score;
-        // }
+        Debug.Log(gameMaster.players.Count);
 
         Destroy(gameObject);
 
-        Debug.Log("Player Died!");
+        Debug.Log("Player" + playerId.ToString() + " Lose.");
 
         for (int x = 0; x < gameMaster.gridNum; x++)
         {
@@ -523,40 +494,27 @@ public class LocalPlayer : MonoBehaviour
             }
         }
 
-        // PhotonNetwork.Disconnect();
-
-        transitionManager.NextSceneLoad();
+        // transitionManager.NextSceneLoad();
     }
 
     public void OnVictory()
     {
         Cursor.visible = true;
 
-        // PlayerStatsManager.instance.lastScore = score;
-        
-        // UnityroomApiClient.Instance.SendScore(1, score, ScoreboardWriteMode.Always);
+        Debug.Log("Player" + playerId.ToString() + " Won!");
 
-        // if (score > PlayerStatsManager.instance.highScore)
+        // Destroy(gameObject);
+
+        // for (int x = 0; x < gameMaster.gridNum; x++)
         // {
-        //     PlayerStatsManager.instance.highScore = score;
+        //     for (int y = 0; y < gameMaster.gridNum; y++)
+        //     {
+        //         i_grids[x, y] = 0;
+        //         UpdateGridStatus(x, y);
+        //     }
         // }
 
-        Destroy(gameObject);
-
-        Debug.Log("Player Won!");
-
-        for (int x = 0; x < gameMaster.gridNum; x++)
-        {
-            for (int y = 0; y < gameMaster.gridNum; y++)
-            {
-                i_grids[x, y] = 0;
-                UpdateGridStatus(x, y);
-            }
-        }
-
-        // PhotonNetwork.Disconnect();
-
-        transitionManager.PreviousSceneLoad();
+        transitionManager.OptionSceneLoad();
     }
 
     private void FillGrid()

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using ExitGames.Client.Photon.StructWrapping;
+using Random = UnityEngine.Random;
 
 public class LocalGameMaster : MonoBehaviour
 {
@@ -34,14 +37,16 @@ public class LocalGameMaster : MonoBehaviour
     public int playerSpawnX;
     public int playerSpawnY;
 
-    private readonly int playerCount = 1;
+    private readonly int playerCount = 2;
+    
+    public List<GameObject> players = new List<GameObject>();
 
     private float elapsedTime;
 
     // GameObject型の二次元配列
     public GameObject[,] g_grids = new GameObject[100,100];
-    
-    private void Start()
+
+    private void Awake()
     {
         playerColors = new List<Color> { new Color(playerBlue.x, playerBlue.y, playerBlue.z),  new Color(playerRed.x, playerRed.y, playerRed.z), new Color(playerGreen.x, playerGreen.y, playerGreen.z), new Color(playerYellow.x, playerYellow.y, playerYellow.z) };
         gridColors = new List<Color> { new Color(gridBlue.x, gridBlue.y, gridBlue.z), new Color(gridRed.x, gridRed.y, gridRed.z), new Color(gridGreen.x, gridGreen.y, gridGreen.z),  new Color(gridYellow.x, gridYellow.y, gridYellow.z) };
@@ -59,28 +64,6 @@ public class LocalGameMaster : MonoBehaviour
                 g_grids[x, y] = _grid;
             }
         }
-
-        // // プレイヤー生成
-        // playerSpawnX = Random.Range(2, gridNum - 2);
-        // playerSpawnY = Random.Range(2, gridNum - 2);
-        //
-        // if (playerColors.Count != gridColors.Count)
-        // {
-        //     Debug.LogError("The number of player color and grid color is different");
-        // }
-        //
-        // int colorNum = Random.Range(0, gridColors.Count);
-        //
-        // GameObject _player = Instantiate(playerObj, new Vector2(playerSpawnX, playerSpawnY), Quaternion.identity);
-        // _player.GetComponent<SpriteRenderer>().color = new Color(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
-        //
-        // _player.GetComponent<LocalPlayer>().gameMaster = gameObject.GetComponent<LocalGameMaster>();
-        // _player.GetComponent<LocalPlayer>().gridParent = gridParent;
-        //
-        // _player.GetComponent<LocalPlayer>().gridColor = gridColors[colorNum];
-        //
-        // playerColors.RemoveAt(colorNum);
-        // gridColors.RemoveAt(colorNum);
         
         for (int i = 0; i <= playerCount - 1; i++)
         {
@@ -91,6 +74,8 @@ public class LocalGameMaster : MonoBehaviour
 
             GameObject _player = Instantiate(playerObj, new Vector2(playerSpawnX, playerSpawnY), Quaternion.identity);
             _player.GetComponent<SpriteRenderer>().color = new Color(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
+            
+            players.Add(_player);
 
             _player.GetComponent<LocalPlayer>().gameMaster = gameObject.GetComponent<LocalGameMaster>();
             _player.GetComponent<LocalPlayer>().gridParent = gridParent;
@@ -104,6 +89,15 @@ public class LocalGameMaster : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // if (players == null)
+        // {
+        //     players.AddRange(GameObject.FindGameObjectsWithTag(nameof(Player)));
+        // }
+        Debug.Log(players.Count);
+    }
+
     private void Update()
     {
         elapsedTime += Time.deltaTime;
@@ -113,6 +107,12 @@ public class LocalGameMaster : MonoBehaviour
             Vector2 orbSpawnPosition = new Vector2(Random.Range(0, 100), Random.Range(0,100));
             Instantiate(energyOrb, orbSpawnPosition, Quaternion.identity);
             elapsedTime = 0f;
+        }
+
+        if (players.Count == 1)
+        {
+            Debug.Log(players.Count());
+            players[0].GetComponent<LocalPlayer>().OnVictory();
         }
     }
 }
