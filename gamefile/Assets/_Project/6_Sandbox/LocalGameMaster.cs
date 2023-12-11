@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using ExitGames.Client.Photon.StructWrapping;
 
 public class LocalGameMaster : MonoBehaviour
 {
@@ -18,20 +19,22 @@ public class LocalGameMaster : MonoBehaviour
 
     private List<Color> playerColors;
     private List<Color> gridColors;
-    private Vector3 playerBlue = new Vector3(20f / 255f, 102f / 255f, 231f / 255f);
-    private Vector3 playerRed = new Vector3(255f / 255f, 71f / 255f, 78f / 255f);
-    private Vector3 playerGreen = new Vector3(67f / 255f, 231f / 255f, 38f / 255f);
-    private Vector3 playerYellow = new Vector3(231f / 255f, 212f / 255f, 47f / 255f);
+    private readonly Vector3 playerBlue = new Vector3(20f / 255f, 102f / 255f, 231f / 255f);
+    private readonly Vector3 playerRed = new Vector3(255f / 255f, 71f / 255f, 78f / 255f);
+    private readonly Vector3 playerGreen = new Vector3(67f / 255f, 231f / 255f, 38f / 255f);
+    private readonly Vector3 playerYellow = new Vector3(231f / 255f, 212f / 255f, 47f / 255f);
 
-    private Vector3 gridBlue = new Vector3(47f / 255f, 102f / 255f, 169f / 255f);
-    private Vector3 gridRed = new Vector3(212f / 255f, 55f / 255f, 60f / 255f);
-    private Vector3 gridGreen = new Vector3(69f / 255f, 169f / 255f, 47f / 255f);
-    private Vector3 gridYellow = new Vector3(195f / 255f, 176f / 255f, 19f / 255f);
+    private readonly Vector3 gridBlue = new Vector3(47f / 255f, 102f / 255f, 169f / 255f);
+    private readonly Vector3 gridRed = new Vector3(212f / 255f, 55f / 255f, 60f / 255f);
+    private readonly Vector3 gridGreen = new Vector3(69f / 255f, 169f / 255f, 47f / 255f);
+    private readonly Vector3 gridYellow = new Vector3(195f / 255f, 176f / 255f, 19f / 255f);
 
     public int gridNum = 100;
 
     public int playerSpawnX;
     public int playerSpawnY;
+
+    private readonly int playerCount = 2;
 
     private float elapsedTime;
 
@@ -57,29 +60,48 @@ public class LocalGameMaster : MonoBehaviour
             }
         }
 
-        // プレイヤー生成
-        playerSpawnX = Random.Range(2, gridNum - 2);
-        playerSpawnY = Random.Range(2, gridNum - 2);
-
-        if (playerColors.Count != gridColors.Count)
+        // // プレイヤー生成
+        // playerSpawnX = Random.Range(2, gridNum - 2);
+        // playerSpawnY = Random.Range(2, gridNum - 2);
+        //
+        // if (playerColors.Count != gridColors.Count)
+        // {
+        //     Debug.LogError("The number of player color and grid color is different");
+        // }
+        //
+        // int colorNum = Random.Range(0, gridColors.Count);
+        //
+        // GameObject _player = Instantiate(playerObj, new Vector2(playerSpawnX, playerSpawnY), Quaternion.identity);
+        // _player.GetComponent<SpriteRenderer>().color = new Color(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
+        //
+        // _player.GetComponent<LocalPlayer>().gameMaster = gameObject.GetComponent<LocalGameMaster>();
+        // _player.GetComponent<LocalPlayer>().gridParent = gridParent;
+        //
+        // _player.GetComponent<LocalPlayer>().gridColor = gridColors[colorNum];
+        //
+        // playerColors.RemoveAt(colorNum);
+        // gridColors.RemoveAt(colorNum);
+        
+        for (int i = 0; i <= playerCount - 1; i++)
         {
-            Debug.LogError("The number of player color and grid color is different");
+            playerSpawnX = Random.Range(2, gridNum - 2);
+            playerSpawnY = Random.Range(2, gridNum - 2);
+
+            int colorNum = Random.Range(0, gridColors.Count);
+
+            GameObject _player = Instantiate(playerObj, new Vector2(playerSpawnX, playerSpawnY), Quaternion.identity);
+            _player.GetComponent<SpriteRenderer>().color = new Color(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
+
+            _player.GetComponent<LocalPlayer>().gameMaster = gameObject.GetComponent<LocalGameMaster>();
+            _player.GetComponent<LocalPlayer>().gridParent = gridParent;
+
+            _player.GetComponent<LocalPlayer>().gridColor = gridColors[colorNum];
+            
+            _player.GetComponent<LocalPlayer>().playerId = i;
+
+            playerColors.RemoveAt(colorNum);
+            gridColors.RemoveAt(colorNum);
         }
-
-        int colorNum = Random.Range(0, gridColors.Count);
-
-        // object[] instanceData = new object[1];
-        // instanceData[0] = new Vector3(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
-        GameObject _player = Instantiate(playerObj, new Vector2(playerSpawnX, playerSpawnY), Quaternion.identity);
-        _player.GetComponent<SpriteRenderer>().color = new Color(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
-
-        _player.GetComponent<Player>().gameMaster = gameObject.GetComponent<GameMaster>();
-        _player.GetComponent<Player>().gridParent = gridParent;
-
-        _player.GetComponent<Player>().gridColor = gridColors[colorNum];
-
-        playerColors.RemoveAt(colorNum);
-        gridColors.RemoveAt(colorNum);
     }
 
     private void Update()

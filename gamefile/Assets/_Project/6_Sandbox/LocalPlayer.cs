@@ -11,7 +11,7 @@ public class LocalPlayer : MonoBehaviour
 {
     public int playerId;
     
-    public GameMaster gameMaster;
+    public LocalGameMaster gameMaster;
     public GameObject gridParent;
 
     public TransitionManager transitionManager;
@@ -22,9 +22,13 @@ public class LocalPlayer : MonoBehaviour
     private int gridNum;
 
     [SerializeField]
+    private GameObject _filledGrids;
+    
     private GameObject filledGrids;
 
     [SerializeField]
+    private GameObject _passedGrids;
+    
     private GameObject passedGrids;
 
     // int型の二次元配列
@@ -77,20 +81,6 @@ public class LocalPlayer : MonoBehaviour
     private void Start()
     {
         this.playerNameText.text = "SandboxPlayer";
-        
-        playerId = Random.Range(0, 1000000);
-
-        // object[] receivedData = gameObject.GetComponent<PhotonView>().InstantiationData;
-        // Vector3 data = (Vector3)receivedData[0];
-        // gameObject.GetComponent<SpriteRenderer>().color = new Color(data.x, data.y, data.z);
-
-        // 自身か確認
-        // if (!photonView.IsMine)
-        // {
-        //     cinemachineCam.SetActive(false);
-        //     scoreText.enabled = false;
-        //     return;
-        // }
 
         Cursor.visible = false;
 
@@ -128,12 +118,10 @@ public class LocalPlayer : MonoBehaviour
         UpdateScore();
 
         // 塗ったマス保存するGameObject生成
-        // filledGrids = PhotonNetwork.Instantiate("FilledGrids", Vector2.zero, Quaternion.identity);
-        Instantiate(filledGrids, Vector2.zero, Quaternion.identity);
+        filledGrids = Instantiate(_filledGrids, Vector2.zero, Quaternion.identity);
 
         // 通ったマス保存するGameObject生成
-        // passedGrids = PhotonNetwork.Instantiate("PassedGrids", Vector2.zero, Quaternion.identity);
-        Instantiate(passedGrids, Vector2.zero, Quaternion.identity);
+        Instantiate(_passedGrids, Vector2.zero, Quaternion.identity);
 
         //passedGrids.GetComponent<PassedGrids>().playerViewId = photonView.ViewID;
         //passedGrids.GetComponent<PassedGrids>().CheckViewID();
@@ -150,7 +138,7 @@ public class LocalPlayer : MonoBehaviour
                 UpdateGridStatus(x, y);
 
                 gameMaster.g_grids[x, y].transform.SetParent(filledGrids.transform);
-                filledGrids.GetComponent<FilledGrids>().OnNewGridFilled(gameMaster.g_grids[x,y].transform.position, gridColor);
+                // filledGrids.GetComponent<FilledGrids>().OnNewGridFilled(gameMaster.g_grids[x,y].transform.position, gridColor);
             }
         }
 
@@ -180,6 +168,11 @@ public class LocalPlayer : MonoBehaviour
             elapsedTime = 0f;
             // PhotonNetwork.LocalPlayer.UpdateScore(score);
             UpdateScore();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            OnDeath();
         }
 
         // if (PhotonNetwork.PlayerList.Length  == 1)
@@ -236,11 +229,15 @@ public class LocalPlayer : MonoBehaviour
             p_grids[posx, posy] = true;
             UpdateGridStatus(posx, posy);
             path_list.Add(new Vector2(posx, posy));
-
+            
+            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = this.playerId;
-            gameMaster.g_grids[posx, posy].GetComponent<Grid>().isPath = true;
-            passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
+            // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
+            
+            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             return;
         }
 
@@ -273,11 +270,15 @@ public class LocalPlayer : MonoBehaviour
             p_grids[posx, posy] = true;
             UpdateGridStatus(posx, posy);
             path_list.Add(new Vector2(posx, posy));
-
+            
+            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = this.playerId;
-            gameMaster.g_grids[posx, posy].GetComponent<Grid>().isPath = true;
-            passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
+            // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
+            
+            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             return;
         }
 
@@ -311,11 +312,15 @@ public class LocalPlayer : MonoBehaviour
             p_grids[posx, posy] = true;
             UpdateGridStatus(posx, posy);
             path_list.Add(new Vector2(posx, posy));
-
+            
+            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = this.playerId;
-            gameMaster.g_grids[posx, posy].GetComponent<Grid>().isPath = true;
-            passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
+            // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
+            
+            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             return;
         }
 
@@ -348,11 +353,15 @@ public class LocalPlayer : MonoBehaviour
             p_grids[posx, posy] = true;
             UpdateGridStatus(posx, posy);
             path_list.Add(new Vector2(posx, posy));
-
+            
+            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            gameMaster.g_grids[posx, posy].GetComponent<Grid>().playerId = this.playerId;
-            gameMaster.g_grids[posx, posy].GetComponent<Grid>().isPath = true;
-            passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
+            gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
+            // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
+            
+            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             return;
         }
 
@@ -368,37 +377,78 @@ public class LocalPlayer : MonoBehaviour
 
     private void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (playerId == 0)
         {
-            if (playerDirection == InputType.down)
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                return;
+                if (playerDirection == InputType.down)
+                {
+                    return;
+                }
+                playerInput = InputType.up;
             }
-            playerInput = InputType.up;
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if (playerDirection == InputType.up)
+                {
+                    return;
+                }
+                playerInput = InputType.down;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                if (playerDirection == InputType.right)
+                {
+                    return;
+                }
+                playerInput = InputType.left;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                if (playerDirection == InputType.left)
+                {
+                    return;
+                }
+                playerInput = InputType.right;
+            }
+        } else if (playerId == 1)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                if (playerDirection == InputType.down)
+                {
+                    return;
+                }
+                playerInput = InputType.up;
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                if (playerDirection == InputType.up)
+                {
+                    return;
+                }
+                playerInput = InputType.down;
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                if (playerDirection == InputType.right)
+                {
+                    return;
+                }
+                playerInput = InputType.left;
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                if (playerDirection == InputType.left)
+                {
+                    return;
+                }
+                playerInput = InputType.right;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        else
         {
-            if (playerDirection == InputType.up)
-            {
-                return;
-            }
-            playerInput = InputType.down;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (playerDirection == InputType.right)
-            {
-                return;
-            }
-            playerInput = InputType.left;
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (playerDirection == InputType.left)
-            {
-                return;
-            }
-            playerInput = InputType.right;
+            Debug.LogError("There are 3 or more players");
         }
     }
 
@@ -643,8 +693,8 @@ public class LocalPlayer : MonoBehaviour
                     i_grids[k + fillMinX, l + fillMinY] = -1;
                     UpdateGridStatus(k + fillMinX, l + fillMinY);
                     gameMaster.g_grids[k + fillMinX, l + fillMinY].transform.SetParent(filledGrids.transform);
-                    gameMaster.g_grids[k + fillMinX, l + fillMinY].GetComponent<Grid>().isPath = false;
-                    filledGrids.GetComponent<FilledGrids>().OnNewGridFilled(gameMaster.g_grids[k + fillMinX, l + fillMinY].transform.position, gridColor);
+                    gameMaster.g_grids[k + fillMinX, l + fillMinY].GetComponent<LocalGrid>().isPath = false;
+                    // filledGrids.GetComponent<FilledGrids>().OnNewGridFilled(gameMaster.g_grids[k + fillMinX, l + fillMinY].transform.position, gridColor);
                 }
                 if (fillingPos[k, l] == false)
                 {
@@ -654,7 +704,7 @@ public class LocalPlayer : MonoBehaviour
             }
         }
 
-        passedGrids.GetComponent<PassedGrids>().DeleteGrids();
+        // passedGrids.GetComponent<PassedGrids>().DeleteGrids();
 
         path_list.Clear();
     }
@@ -677,36 +727,29 @@ public class LocalPlayer : MonoBehaviour
         }
     }
 
-    // private void OnTriggerEnter2D(Collider2D collision)
-    // {
-    //     if (collision.gameObject.tag == "PowerUps")
-    //     {
-    //         if (PhotonNetwork.IsMasterClient)
-    //         {
-    //             PhotonNetwork.Destroy(collision.gameObject);
-    //         } else
-    //         {
-    //             Destroy(collision.gameObject);
-    //         }
-    //         
-    //         StartCoroutine("PowerUp");
-    //     }
-    //
-    //     if (!photonView.IsMine)
-    //     {
-    //         return;
-    //     }
-    //
-    //     if (collision.gameObject.tag == "EnemyGrid")
-    //     {
-    //         Debug.Log("Destroying Grid");
-    //         Destroy(collision.gameObject);
-    //     }
-    // }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PowerUps")
+        {
+            Destroy(collision.gameObject);
+            
+            StartCoroutine("PowerUp");
+        }
+    
+        // if (!photonView.IsMine)
+        // {
+        //     return;
+        // }
+    
+        if (collision.gameObject.tag == "EnemyGrid")
+        {
+            Debug.Log("Destroying Grid");
+            Destroy(collision.gameObject);
+        }
+    }
 
     private IEnumerator PowerUp()
     {
-        Debug.Log("Power Up!");
         ppBloomSettings.intensity.value = 10f;
         speed = 0.2f;
         yield return new WaitForSeconds(5f);

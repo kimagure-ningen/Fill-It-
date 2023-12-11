@@ -496,6 +496,7 @@ public class Player : MonoBehaviourPunCallbacks
 
     private void FillGrid()
     {
+        Debug.Log("Filling");
         // 囲んだ場所X,Yの最大・最小値
         float maxX = path_list[path_list.Count - 1].x;
         float minX = path_list[path_list.Count - 1].x;

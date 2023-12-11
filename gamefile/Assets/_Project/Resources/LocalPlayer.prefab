@@ -818,6 +818,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335a003a800df42f29646d358679033e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerId: 0
+  gameMaster: {fileID: 0}
+  gridParent: {fileID: 0}
+  transitionManager: {fileID: 0}
+  grid: {fileID: 6229167569711281652, guid: 92faf5de5b57e4bba9a59a6f39648b4c, type: 3}
+  _filledGrids: {fileID: 1577863782302569073, guid: e92eafc570de24890b45ab622a6c43c2, type: 3}
+  _passedGrids: {fileID: 8460659576931573436, guid: 0b3f22997edd34a39b717b068f1e840d, type: 3}
+  gridColor: {r: 0, g: 0, b: 0, a: 0}
+  scoreText: {fileID: 7350028528030808101}
+  playerNameText: {fileID: 701070181}
+  cinemachineCam: {fileID: 1398228234}
+  postProcessingMaster: {fileID: 0}
 --- !u!50 &-8030261506039284067
 Rigidbody2D:
   serializedVersion: 4
