@@ -24,7 +24,7 @@ public class ModeSelectionMaster : MonoBehaviourPunCallbacks
     private readonly float expandSize = 1.075f;
 
     private readonly int roomSize = 4;
-
+    
     public void BattleRoyaleHover()
     {
         battleRoyale.transform.DOScale(new Vector3(expandSize, expandSize, expandSize), .25f);
