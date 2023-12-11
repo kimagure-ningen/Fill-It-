@@ -34,7 +34,7 @@ public class LocalGameMaster : MonoBehaviour
     public int playerSpawnX;
     public int playerSpawnY;
 
-    private readonly int playerCount = 2;
+    private readonly int playerCount = 1;
 
     private float elapsedTime;
 

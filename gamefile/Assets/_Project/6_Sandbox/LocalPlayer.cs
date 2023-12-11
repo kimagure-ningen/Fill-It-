@@ -212,6 +212,7 @@ public class LocalPlayer : MonoBehaviour
 
     private void MoveUp()
     {
+        Debug.Log("Up");
         PlayerMovement();
         int posx = (int)gameObject.transform.position.x;
         int posy = (int)gameObject.transform.position.y;
@@ -230,7 +231,6 @@ public class LocalPlayer : MonoBehaviour
             UpdateGridStatus(posx, posy);
             path_list.Add(new Vector2(posx, posy));
             
-            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
@@ -238,6 +238,7 @@ public class LocalPlayer : MonoBehaviour
             // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
             
             Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
+            Debug.Log(gameMaster.g_grids[posx, posy].transform.position);
             return;
         }
 
@@ -245,6 +246,7 @@ public class LocalPlayer : MonoBehaviour
         {
             if (i_grids[posx, posy - 1] != -1)
             {
+                Debug.Log("Filling Grid");
                 FillGrid();
                 return;
             }
@@ -253,6 +255,7 @@ public class LocalPlayer : MonoBehaviour
 
     private void MoveDown()
     {
+        Debug.Log("Down");
         PlayerMovement();
         int posx = (int)gameObject.transform.position.x;
         int posy = (int)gameObject.transform.position.y;
@@ -271,7 +274,6 @@ public class LocalPlayer : MonoBehaviour
             UpdateGridStatus(posx, posy);
             path_list.Add(new Vector2(posx, posy));
             
-            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
@@ -279,6 +281,7 @@ public class LocalPlayer : MonoBehaviour
             // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
             
             Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
+            Debug.Log(gameMaster.g_grids[posx, posy].transform.position);
             return;
         }
 
@@ -286,6 +289,7 @@ public class LocalPlayer : MonoBehaviour
         {
             if (i_grids[posx, posy + 1] != -1)
             {
+                Debug.Log("Filling Grid");
                 FillGrid();
                 return;
             }
@@ -294,6 +298,7 @@ public class LocalPlayer : MonoBehaviour
 
     private void MoveRight()
     {
+        Debug.Log("Right");
         PlayerMovement();
         int posx = (int)gameObject.transform.position.x;
         int posy = (int)gameObject.transform.position.y;
@@ -313,7 +318,6 @@ public class LocalPlayer : MonoBehaviour
             UpdateGridStatus(posx, posy);
             path_list.Add(new Vector2(posx, posy));
             
-            Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             gameMaster.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
@@ -321,6 +325,7 @@ public class LocalPlayer : MonoBehaviour
             // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
             
             Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
+            Debug.Log(gameMaster.g_grids[posx, posy].transform.position);
             return;
         }
 
@@ -328,6 +333,7 @@ public class LocalPlayer : MonoBehaviour
         {
             if (i_grids[posx - 1, posy] != -1)
             {
+                Debug.Log("Filling Grid");
                 FillGrid();
                 return;
             }
@@ -336,6 +342,7 @@ public class LocalPlayer : MonoBehaviour
 
     private void MoveLeft()
     {
+        Debug.Log("Left");
         PlayerMovement();
         int posx = (int)gameObject.transform.position.x;
         int posy = (int)gameObject.transform.position.y;
@@ -361,6 +368,7 @@ public class LocalPlayer : MonoBehaviour
             gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
             // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
             
+            Debug.Log(gameMaster.g_grids[posx, posy].transform.position);
             Debug.Log(gameMaster.g_grids[posx, posy].GetComponent<LocalGrid>().isPath);
             return;
         }
@@ -369,6 +377,7 @@ public class LocalPlayer : MonoBehaviour
         {
             if (i_grids[posx + 1, posy] != -1)
             {
+                Debug.Log("Filling Grid");
                 FillGrid();
                 return;
             }
