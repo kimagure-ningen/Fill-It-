@@ -25,3 +25,6 @@ Cmd: compileComputeKernel
   error: 1 plat 9 at BarracudaReferenceImpl.compute(2769): signed/unsigned mismatch, unsigned assumed
  ok=1 outsize=9601
 
+Cmd: shutdown
+
+Quitting shader compiler process
