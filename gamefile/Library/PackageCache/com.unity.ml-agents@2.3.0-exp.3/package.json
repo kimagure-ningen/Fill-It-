@@ -1,0 +1,27 @@
+{
+  "name": "com.unity.ml-agents",
+  "displayName": "ML Agents",
+  "version": "2.3.0-exp.3",
+  "unity": "2021.3",
+  "description": "Use state-of-the-art machine learning to create intelligent character behaviors in any Unity environment (games, robotics, film, etc.).",
+  "dependencies": {
+    "com.unity.barracuda": "3.0.0",
+    "com.unity.modules.imageconversion": "1.0.0",
+    "com.unity.modules.jsonserialize": "1.0.0"
+  },
+  "upmCi": {
+    "footprint": "62ef75019a3e03b3b1485e30cd1efe51548d099c"
+  },
+  "repository": {
+    "url": "https://github.com/Unity-Technologies/ml-agents.git",
+    "type": "git",
+    "revision": "95dec673e6262a95765af41fc325724f23b31b06"
+  },
+  "samples": [
+    {
+      "displayName": "3D Ball",
+      "description": "The 3D Ball sample is a simple environment that is a great for jumping into ML-Agents to see how things work.",
+      "path": "Samples~/3DBall"
+    }
+  ]
+}
