@@ -9,7 +9,7 @@ public class LocalGrid : MonoBehaviour
 
     public int playerId;
 
-    public LocalPlayer player;
+    public PlayerAgent player;
 
     private GameObject[] players;
 
@@ -27,7 +27,7 @@ public class LocalGrid : MonoBehaviour
         {
             if (collision.gameObject.tag == nameof(Player))
             {
-                int collisionId = collision.gameObject.GetComponent<LocalPlayer>().playerId;
+                int collisionId = collision.gameObject.GetComponent<PlayerAgent>().playerId;
                 Debug.Log(collisionId);
                 if (collisionId != playerId)
                 {
@@ -35,9 +35,9 @@ public class LocalGrid : MonoBehaviour
                     // player = PhotonView.Find(playerId).gameObject.GetComponent<Player>();
                     foreach (GameObject _player in players)
                     {
-                        if (_player.GetComponent<LocalPlayer>().playerId == playerId)
+                        if (_player.GetComponent<PlayerAgent>().playerId == playerId)
                         {
-                            player = _player.GetComponent<LocalPlayer>();
+                            player = _player.GetComponent<PlayerAgent>();
                         }
                     }
                     player.OnDeath();
@@ -47,7 +47,7 @@ public class LocalGrid : MonoBehaviour
         {
             if (collision.gameObject.tag == nameof(Player))
             {
-                int collisionId = collision.gameObject.GetComponent<LocalPlayer>().playerId;
+                int collisionId = collision.gameObject.GetComponent<PlayerAgent>().playerId;
                 if (playerId == 0)
                 {
                     return;

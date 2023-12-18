@@ -432,6 +432,7 @@
 "Assets/_Project/Scripts/Data/GameData.cs"
 "Assets/_Project/Scripts/Data/IDataPersistence.cs"
 "Assets/_Project/Scripts/Data/PlayerStatsManager.cs"
+"Assets/_Project/Scripts/SingletonMonoBehaviour.cs"
 "Assets/_Project/Scripts/Transitions/TransitionManager.cs"
 -langversion:9.0
 

@@ -725,12 +725,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7350028529824858521}
   - component: {fileID: 7350028529824858520}
-  - component: {fileID: -1339623258142341221}
   - component: {fileID: -8030261506039284067}
   - component: {fileID: -2537835420196989602}
+  - component: {fileID: 7977960111691148253}
   - component: {fileID: -9111008710185466481}
-  - component: {fileID: 8524372179533860033}
   - component: {fileID: -7493256513190769540}
+  - component: {fileID: 2068570079826116908}
   m_Layer: 0
   m_Name: LocalPlayer
   m_TagString: Player
@@ -809,30 +809,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-1339623258142341221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7350028529824858523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 335a003a800df42f29646d358679033e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerId: 0
-  gameMaster: {fileID: 0}
-  gridParent: {fileID: 0}
-  transitionManager: {fileID: 0}
-  grid: {fileID: 6229167569711281652, guid: 92faf5de5b57e4bba9a59a6f39648b4c, type: 3}
-  _filledGrids: {fileID: 1577863782302569073, guid: e92eafc570de24890b45ab622a6c43c2, type: 3}
-  _passedGrids: {fileID: 8460659576931573436, guid: 0b3f22997edd34a39b717b068f1e840d, type: 3}
-  gridColor: {r: 0, g: 0, b: 0, a: 0}
-  scoreText: {fileID: 7350028528030808101}
-  playerNameText: {fileID: 701070181}
-  cinemachineCam: {fileID: 1398228234}
-  postProcessingMaster: {fileID: 0}
 --- !u!50 &-8030261506039284067
 Rigidbody2D:
   serializedVersion: 4
@@ -880,6 +856,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &7977960111691148253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7350028529824858523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d10a8c31bbd4f9db036a8be423502e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 1000
+  playerId: 0
+  enemyPlayer: {fileID: 0}
+  playerNameText: {fileID: 701070181}
+  gameMaster: {fileID: 0}
+  gridParent: {fileID: 0}
+  scoreText: {fileID: 7350028528030808101}
+  gridColor: {r: 0, g: 0, b: 0, a: 0}
+  transitionManager: {fileID: 0}
+  postProcessingMaster: {fileID: 0}
+  _filledGrids: {fileID: 1577863782302569073, guid: e92eafc570de24890b45ab622a6c43c2, type: 3}
+  _passedGrids: {fileID: 8460659576931573436, guid: 0b3f22997edd34a39b717b068f1e840d, type: 3}
+  cinemachineCam: {fileID: 1398228234}
 --- !u!114 &-9111008710185466481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,22 +915,6 @@ MonoBehaviour:
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
---- !u!114 &8524372179533860033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7350028529824858523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
 --- !u!114 &-7493256513190769540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,3 +931,19 @@ MonoBehaviour:
   NumStepsToRecord: 0
   DemonstrationName: demo_001
   DemonstrationDirectory: Assets/_Project/6_Sandbox
+--- !u!114 &2068570079826116908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7350028529824858523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0

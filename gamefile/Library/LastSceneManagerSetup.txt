@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/_Project/6_Sandbox/SandboxScene.unity
+- path: Assets/_Project/1_Title/TitleScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

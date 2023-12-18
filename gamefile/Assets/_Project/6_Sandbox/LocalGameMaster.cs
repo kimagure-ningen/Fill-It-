@@ -8,7 +8,7 @@ using DG.Tweening;
 using ExitGames.Client.Photon.StructWrapping;
 using Random = UnityEngine.Random;
 
-public class LocalGameMaster : MonoBehaviour
+public class LocalGameMaster : SingletonMonoBehaviour<LocalGameMaster>
 {
     [SerializeField]
     private GameObject gridParent;
@@ -46,8 +46,10 @@ public class LocalGameMaster : MonoBehaviour
     // GameObject型の二次元配列
     public GameObject[,] g_grids = new GameObject[100,100];
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         playerColors = new List<Color> { new Color(playerBlue.x, playerBlue.y, playerBlue.z),  new Color(playerRed.x, playerRed.y, playerRed.z), new Color(playerGreen.x, playerGreen.y, playerGreen.z), new Color(playerYellow.x, playerYellow.y, playerYellow.z) };
         gridColors = new List<Color> { new Color(gridBlue.x, gridBlue.y, gridBlue.z), new Color(gridRed.x, gridRed.y, gridRed.z), new Color(gridGreen.x, gridGreen.y, gridGreen.z),  new Color(gridYellow.x, gridYellow.y, gridYellow.z) };
 
@@ -72,17 +74,14 @@ public class LocalGameMaster : MonoBehaviour
 
             int colorNum = Random.Range(0, gridColors.Count);
 
-            GameObject _player = Instantiate(playerObj, new Vector2(playerSpawnX, playerSpawnY), Quaternion.identity);
+            GameObject _player = Instantiate(playerObj, new Vector3(playerSpawnX, playerSpawnY, 0), Quaternion.identity);
             _player.GetComponent<SpriteRenderer>().color = new Color(playerColors[colorNum].r, playerColors[colorNum].g, playerColors[colorNum].b);
             
             players.Add(_player);
-
-            _player.GetComponent<LocalPlayer>().gameMaster = gameObject.GetComponent<LocalGameMaster>();
-            _player.GetComponent<LocalPlayer>().gridParent = gridParent;
-
-            _player.GetComponent<LocalPlayer>().gridColor = gridColors[colorNum];
             
-            _player.GetComponent<LocalPlayer>().playerId = i;
+            _player.GetComponent<PlayerAgent>().gridParent = gridParent;
+            _player.GetComponent<PlayerAgent>().gridColor = gridColors[colorNum];
+            _player.GetComponent<PlayerAgent>().playerId = i;
 
             playerColors.RemoveAt(colorNum);
             gridColors.RemoveAt(colorNum);
@@ -112,7 +111,7 @@ public class LocalGameMaster : MonoBehaviour
         if (players.Count == 1)
         {
             Debug.Log(players.Count());
-            players[0].GetComponent<LocalPlayer>().OnVictory();
+            players[0].GetComponent<PlayerAgent>().OnVictory();
         }
     }
 }
