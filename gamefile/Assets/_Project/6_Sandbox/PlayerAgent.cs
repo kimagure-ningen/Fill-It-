@@ -8,12 +8,28 @@ using Unity.MLAgents.Sensors;
 using UnityEngine.Rendering.PostProcessing;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class PlayerAgent : Agent
 {
     public int playerId;
     public GameObject enemyPlayer;
     
+    private float speed = 0.3f;
+    private float elapsedTime;
+    private int score;
+    
+    [SerializeField]
+    private GameObject cinemachineCam;
+    
+    public TransitionManager transitionManager;
+    
+    [SerializeField]
+    private PostProcessVolume postProcessingMaster;
+    private Bloom ppBloomSettings;
+    
+    private InputType playerInput;
+    private InputType playerDirection;
     private enum InputType
     {
         up,
@@ -21,22 +37,16 @@ public class PlayerAgent : Agent
         left,
         right
     }
-
-    private InputType playerInput;
-    private InputType playerDirection;
     
+    [Header("UI (Do not touch)")]
     [SerializeField]
     private TextMeshProUGUI playerNameText;
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
     
     public GameObject gridParent;
     
     private List<Vector2> path_list;
-    
-    private float speed = 0.3f;
-    
-    private int score;
-    [SerializeField]
-    private TextMeshProUGUI scoreText;
     
     public Color gridColor;
     private Color grey = new Color(48f / 255f, 47f / 255f, 48f / 255f);
@@ -44,23 +54,13 @@ public class PlayerAgent : Agent
     private Vector3 pathScale = new Vector3(1f, 1f, 1f);
     
     private int gridNum;
-    
-    // int型の二次元配列
+    // マス情報
     private int[,] i_grids = new int[100,100];
-    // 配列が 0 → 無占拠
-    //       -1 → 陣地
-    //       1 → 通った場所
+    // 0 → 無占拠 / -1 → 陣地 / 1 → 通った場所
 
-    // プレイヤーの位置の二次元配列
+    // プレイヤー位置
     private bool[,] p_grids = new bool[100,100];
-    // 配列が false → 無占拠
-    //       true → プレイヤー
-
-    public TransitionManager transitionManager;
-    
-    [SerializeField]
-    private PostProcessVolume postProcessingMaster;
-    private Bloom ppBloomSettings;
+    // false → 無占拠 / true → プレイヤー
     
     [SerializeField]
     private GameObject _filledGrids;
@@ -71,11 +71,6 @@ public class PlayerAgent : Agent
     private GameObject _passedGrids;
     
     private GameObject passedGrids;
-    
-    [SerializeField]
-    private GameObject cinemachineCam;
-
-    private float elapsedTime;
     
     public override void Initialize()
     {
@@ -288,6 +283,75 @@ public class PlayerAgent : Agent
         }
     }
 
+    private void Move(InputType direction)
+    {
+        Debug.Log(direction.ToString());
+        PlayerMovement();
+        int posx = (int)gameObject.transform.position.x;
+        int posy = (int)gameObject.transform.position.y;
+
+        if (i_grids[posx, posy] == 1)
+        {
+            OnDeath();
+            return;
+        }
+        
+        if (i_grids[posx, posy] != -1)
+        {
+            i_grids[posx, posy] = 1;
+            switch (direction) 
+            {
+                case (InputType.up):
+                    p_grids[posx, posy - 1] = false;
+                    break;
+                case(InputType.down):
+                    p_grids[posx, posy + 1] = false;
+                    break;
+                case(InputType.right):
+                    p_grids[posx - 1, posy] = false;
+                    break;
+                case(InputType.left):
+                    p_grids[posx + 1, posy] = false;
+                    break;
+            }
+            p_grids[posx, posy] = true;
+            UpdateGridStatus(posx, posy);
+            path_list.Add(new Vector2(posx, posy));
+            
+            LocalGameMaster.Instance.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
+            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
+            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
+            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
+            return;
+        }
+        
+        if (i_grids[posx, posy] == -1)
+        {
+            int _posy = new int();
+            switch (direction)
+            {
+                case(InputType.up):
+                    _posy = posy + 1;
+                    break;
+                case (InputType.down):
+                    _posy = posy - 1;
+                    break;
+                case(InputType.right):
+                    _posy = posy + 1;
+                    break;
+                case(InputType.left):
+                    _posy = posy - 1;
+                    break;
+            }
+            if (i_grids[posx, _posy] != -1)
+            {
+                Debug.Log("Filling Grid");
+                FillGrid();
+                return;
+            }
+        }
+    }
+
     private void MoveDown()
     {
         Debug.Log("Down");
@@ -423,25 +487,28 @@ public class PlayerAgent : Agent
     
     private void UpdateGridStatus(int x, int y)
     {
+        Color gridCol = LocalGameMaster.Instance.g_grids[x, y].GetComponent<SpriteRenderer>().color;
+        Vector3 gridScale = LocalGameMaster.Instance.g_grids[x, y].transform.localScale;
+        
         if (i_grids[x, y] == 0)
         {
-            LocalGameMaster.Instance.g_grids[x, y].GetComponent<SpriteRenderer>().color = grey;
-            LocalGameMaster.Instance.g_grids[x, y].transform.localScale = normalScale;
+            gridCol = grey;
+            gridScale = normalScale;
         }
         if (i_grids[x, y] == -1)
         {
-            LocalGameMaster.Instance.g_grids[x, y].GetComponent<SpriteRenderer>().color = gridColor;
-            LocalGameMaster.Instance.g_grids[x, y].transform.localScale = normalScale;
+            gridCol = gridColor;
+            gridScale = normalScale;
         }
         if (i_grids[x, y] == 1)
         {
-            LocalGameMaster.Instance.g_grids[x, y].GetComponent<SpriteRenderer>().color = gridColor;
-            LocalGameMaster.Instance.g_grids[x, y].transform.localScale = pathScale;
+            gridCol = gridColor;
+            gridScale = pathScale;
         }
         if (i_grids[x, y] == 2)
         {
-            LocalGameMaster.Instance.g_grids[x, y].GetComponent<SpriteRenderer>().color = gridColor;
-            LocalGameMaster.Instance.g_grids[x, y].transform.localScale = normalScale;
+            gridCol = gridColor;
+            gridScale = normalScale;
         }
     }
 
