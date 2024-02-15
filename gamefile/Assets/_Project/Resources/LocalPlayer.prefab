@@ -874,16 +874,15 @@ MonoBehaviour:
   MaxStep: 1000
   playerId: 0
   enemyPlayer: {fileID: 0}
-  playerNameText: {fileID: 701070181}
-  gameMaster: {fileID: 0}
-  gridParent: {fileID: 0}
-  scoreText: {fileID: 7350028528030808101}
-  gridColor: {r: 0, g: 0, b: 0, a: 0}
+  cinemachineCam: {fileID: 1398228234}
   transitionManager: {fileID: 0}
   postProcessingMaster: {fileID: 0}
+  playerNameText: {fileID: 701070181}
+  scoreText: {fileID: 7350028528030808101}
+  gridParent: {fileID: 0}
+  gridColor: {r: 0, g: 0, b: 0, a: 0}
   _filledGrids: {fileID: 1577863782302569073, guid: e92eafc570de24890b45ab622a6c43c2, type: 3}
   _passedGrids: {fileID: 8460659576931573436, guid: 0b3f22997edd34a39b717b068f1e840d, type: 3}
-  cinemachineCam: {fileID: 1398228234}
 --- !u!114 &-9111008710185466481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,12 +896,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 5
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 0
-      BranchSizes: 01000000
-    VectorActionSize: 01000000
+      m_NumContinuousActions: 5
+      BranchSizes: 04000000
+    VectorActionSize: 
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
@@ -946,4 +945,4 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 250

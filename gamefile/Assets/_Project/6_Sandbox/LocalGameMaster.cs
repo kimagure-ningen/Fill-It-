@@ -37,7 +37,7 @@ public class LocalGameMaster : SingletonMonoBehaviour<LocalGameMaster>
     public int playerSpawnX;
     public int playerSpawnY;
 
-    private readonly int playerCount = 2;
+    private readonly int playerCount = 1;
     
     public List<GameObject> players = new List<GameObject>();
 

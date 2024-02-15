@@ -137,23 +137,26 @@ public class PlayerAgent : Agent
 
         playerInput = InputType.right;
         PlayerMovement();
+        Debug.Log("Initialized");
     }
-    
     public override void OnEpisodeBegin()
     {
-        
+        Debug.Log("OnEpisodeBegin method called");
     }
     
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(this.transform.localPosition);
-        sensor.AddObservation(enemyPlayer.transform.localPosition);
+        // sensor.AddObservation(enemyPlayer.transform.localPosition);
+        Debug.Log("CollectObservations method called");
     }
 
-    public void OnActionReceived(float[] vectorAction)
+    public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        int action = (int)vectorAction[0];
-        if (action == 1)
+        Debug.Log("OnActionReceived method called");
+        int action = (int)actionBuffers.DiscreteActions[0];
+        Debug.Log(action);
+        if (action == 0)
         {
             if (playerDirection == InputType.down)
             {
@@ -161,7 +164,7 @@ public class PlayerAgent : Agent
             }
             playerInput = InputType.up;
         }
-        if (action == 2)
+        if (action == 1)
         {
             if (playerDirection == InputType.up)
             {
@@ -169,7 +172,7 @@ public class PlayerAgent : Agent
             }
             playerInput = InputType.down;
         }
-        if (action == 3)
+        if (action == 2)
         {
             if (playerDirection == InputType.right)
             {
@@ -177,7 +180,7 @@ public class PlayerAgent : Agent
             }
             playerInput = InputType.left;
         }
-        if (action == 4)
+        if (action == 3)
         {
             if (playerDirection == InputType.left)
             {
@@ -194,98 +197,67 @@ public class PlayerAgent : Agent
         EndEpisode();
     }
     
-    public void Heuristic(float[] actionsOut)
+    public override void Heuristic(in ActionBuffers actionsOut)
     {
-        actionsOut[0] = 0;
+        Debug.Log("Heuristic method called");
+        
+        var discreteActions = actionsOut.DiscreteActions;
+
+        discreteActions[0] = 0;
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            actionsOut[0] = 1;
+            discreteActions[0] = 1;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            actionsOut[0] = 2;
+            discreteActions[0] = 2;
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            actionsOut[0] = 3;
+            discreteActions[0] = 3;
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            actionsOut[0] = 4;
+            discreteActions[0] = 4;
         }
     }
+
+
     
     private void PlayerMovement()
     {
         if (playerInput == InputType.up)
         {
+            Debug.Log("s");
             playerDirection = InputType.up;
             gameObject.transform.DOLocalMove(new Vector2(gameObject.transform.position.x + 0f, gameObject.transform.position.y + 1f), speed)
-                .OnComplete(MoveUp);
+                .OnComplete(() => Move(InputType.up));
         }
         if (playerInput == InputType.down)
         {
             playerDirection = InputType.down;
             gameObject.transform.DOLocalMove(new Vector2(gameObject.transform.position.x + 0f, gameObject.transform.position.y + -1f), speed)
-                .OnComplete(MoveDown);
+                .OnComplete(() => Move(InputType.down));
         }
         if (playerInput == InputType.right)
         {
             playerDirection = InputType.right;
             gameObject.transform.DOLocalMove(new Vector2(gameObject.transform.position.x + 1f, gameObject.transform.position.y + 0f), speed)
-                .OnComplete(MoveRight);
+                .OnComplete(() => Move(InputType.right));
         }
         if (playerInput == InputType.left)
         {
             playerDirection = InputType.left;
             gameObject.transform.DOLocalMove(new Vector2(gameObject.transform.position.x + -1f, gameObject.transform.position.y + 0f), speed)
-                .OnComplete(MoveLeft);
-        }
-    }
-    
-    private void MoveUp()
-    {
-        Debug.Log("Up");
-        PlayerMovement();
-        int posx = (int)gameObject.transform.position.x;
-        int posy = (int)gameObject.transform.position.y;
-
-        if (i_grids[posx, posy] == 1) // 今のマスが通った場所だったら
-        {
-            OnDeath();
-            return;
-        }
-
-        if (i_grids[posx, posy] != -1) // 今のマスが陣地じゃなかったら
-        {
-            i_grids[posx, posy] = 1;
-            p_grids[posx, posy - 1] = false;
-            p_grids[posx, posy] = true;
-            UpdateGridStatus(posx, posy);
-            path_list.Add(new Vector2(posx, posy));
-            
-            LocalGameMaster.Instance.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
-            // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
-            return;
-        }
-
-        if (i_grids[posx, posy] == -1) // 今のマスが陣地だったら
-        {
-            if (i_grids[posx, posy - 1] != -1)
-            {
-                Debug.Log("Filling Grid");
-                FillGrid();
-                return;
-            }
+                .OnComplete(() => Move(InputType.left));
         }
     }
 
     private void Move(InputType direction)
     {
         Debug.Log(direction.ToString());
+        Debug.Log("hi");
         PlayerMovement();
         int posx = (int)gameObject.transform.position.x;
         int posy = (int)gameObject.transform.position.y;
@@ -351,127 +323,6 @@ public class PlayerAgent : Agent
             }
         }
     }
-
-    private void MoveDown()
-    {
-        Debug.Log("Down");
-        PlayerMovement();
-        int posx = (int)gameObject.transform.position.x;
-        int posy = (int)gameObject.transform.position.y;
-
-        if (i_grids[posx, posy] == 1)
-        {
-            OnDeath();
-            return;
-        }
-
-        if (i_grids[posx, posy] != -1)
-        {
-            i_grids[posx, posy] = 1;
-            p_grids[posx, posy + 1] = false;
-            p_grids[posx, posy] = true;
-            UpdateGridStatus(posx, posy);
-            path_list.Add(new Vector2(posx, posy));
-            
-            LocalGameMaster.Instance.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
-            // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
-            return;
-        }
-
-        if (i_grids[posx, posy] == -1)
-        {
-            if (i_grids[posx, posy + 1] != -1)
-            {
-                Debug.Log("Filling Grid");
-                FillGrid();
-                return;
-            }
-        }
-    }
-
-    private void MoveRight()
-    {
-        Debug.Log("Right");
-        PlayerMovement();
-        int posx = (int)gameObject.transform.position.x;
-        int posy = (int)gameObject.transform.position.y;
-
-
-        if (i_grids[posx, posy] == 1)
-        {
-            OnDeath();
-            return;
-        }
-
-        if (i_grids[posx, posy] != -1)
-        {
-            i_grids[posx, posy] = 1;
-            p_grids[posx - 1, posy] = false;
-            p_grids[posx, posy] = true;
-            UpdateGridStatus(posx, posy);
-            path_list.Add(new Vector2(posx, posy));
-            
-            LocalGameMaster.Instance.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
-            // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
-            return;
-        }
-
-        if (i_grids[posx, posy] == -1)
-        {
-            if (i_grids[posx - 1, posy] != -1)
-            {
-                Debug.Log("Filling Grid");
-                FillGrid();
-                return;
-            }
-        }
-    }
-
-    private void MoveLeft()
-    {
-        Debug.Log("Left");
-        PlayerMovement();
-        int posx = (int)gameObject.transform.position.x;
-        int posy = (int)gameObject.transform.position.y;
-
-        if (i_grids[posx, posy] == 1)
-        {
-            OnDeath();
-            return;
-        }
-
-        if (i_grids[posx, posy] != -1)
-        {
-            i_grids[posx, posy] = 1;
-            p_grids[posx + 1, posy] = false;
-            p_grids[posx, posy] = true;
-            UpdateGridStatus(posx, posy);
-            path_list.Add(new Vector2(posx, posy));
-            
-            LocalGameMaster.Instance.g_grids[posx, posy].transform.SetParent(passedGrids.transform);
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().playerId = this.playerId;
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().isPath = true;
-            LocalGameMaster.Instance.g_grids[posx, posy].GetComponent<LocalGrid>().player = this;
-            // passedGrids.GetComponent<PassedGrids>().OnNewGridPassed(gameMaster.g_grids[posx, posy].transform.position, gridColor);
-            return;
-        }
-
-        if (i_grids[posx, posy] == -1)
-        {
-            if (i_grids[posx + 1, posy] != -1)
-            {
-                Debug.Log("Filling Grid");
-                FillGrid();
-                return;
-            }
-        }
-    }
     
     private void CheckPlayerPos()
     {
@@ -514,6 +365,7 @@ public class PlayerAgent : Agent
 
     public void OnDeath()
     {
+        EndEpisode();
         Cursor.visible = true;
 
         LocalGameMaster.Instance.players.Remove(gameObject);
@@ -533,7 +385,7 @@ public class PlayerAgent : Agent
             }
         }
 
-        // transitionManager.NextSceneLoad();
+        
     }
     
     private void FillGrid()
@@ -690,8 +542,6 @@ public class PlayerAgent : Agent
             }
         }
 
-        // passedGrids.GetComponent<PassedGrids>().DeleteGrids();
-
         path_list.Clear();
     }
 
@@ -699,8 +549,7 @@ public class PlayerAgent : Agent
     {
         scoreText.text = score.ToString();
     }
-
-    // [PunRPC]
+    
     private void MapSetup()
     {
         for (int x = 0; x < gridNum; x++)
@@ -721,11 +570,6 @@ public class PlayerAgent : Agent
             
             StartCoroutine("PowerUp");
         }
-    
-        // if (!photonView.IsMine)
-        // {
-        //     return;
-        // }
     
         if (collision.gameObject.tag == "EnemyGrid")
         {
